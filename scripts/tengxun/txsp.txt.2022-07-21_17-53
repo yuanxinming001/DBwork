@@ -1,0 +1,899 @@
+2022-07-21 17:52:59,381 DEBUG [remote_connection.py(_request:388)] - DELETE http://127.0.0.1:4723/wd/hub/session/6ddc0244-40d9-48e8-89f2-edd927d39584 {}
+2022-07-21 17:53:00,181 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "DELETE /wd/hub/session/6ddc0244-40d9-48e8-89f2-edd927d39584 HTTP/1.1" 200 14
+2022-07-21 17:53:00,181 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:00,229 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session {"capabilities": {"firstMatch": [{"platformName": "Android", "appium:platformVersion": "9", "appium:deviceName": "Android Emulater", "appium:appPackage": "com.ktcp.video", "appium:appActivity": ".activity.MainActivity", "appium:unicodeKeyboard": true, "appium:resetKeyboard": true}]}, "desiredCapabilities": {"platformName": "Android", "platformVersion": "9", "deviceName": "Android Emulater", "appPackage": "com.ktcp.video", "appActivity": ".activity.MainActivity", "unicodeKeyboard": true, "resetKeyboard": true}}
+2022-07-21 17:53:00,229 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session {"capabilities": {"firstMatch": [{"platformName": "Android", "appium:platformVersion": "9", "appium:deviceName": "Android Emulater", "appium:appPackage": "com.ktcp.video", "appium:appActivity": ".activity.MainActivity", "appium:unicodeKeyboard": true, "appium:resetKeyboard": true}]}, "desiredCapabilities": {"platformName": "Android", "platformVersion": "9", "deviceName": "Android Emulater", "appPackage": "com.ktcp.video", "appActivity": ".activity.MainActivity", "unicodeKeyboard": true, "resetKeyboard": true}}
+2022-07-21 17:53:00,229 DEBUG [connectionpool.py(_new_conn:232)] - Starting new HTTP connection (1): 127.0.0.1:4723
+2022-07-21 17:53:00,229 DEBUG [connectionpool.py(_new_conn:232)] - Starting new HTTP connection (1): 127.0.0.1:4723
+2022-07-21 17:53:12,571 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session HTTP/1.1" 200 931
+2022-07-21 17:53:12,571 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session HTTP/1.1" 200 931
+2022-07-21 17:53:12,581 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:12,581 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:12,582 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.Button[2]"}
+2022-07-21 17:53:12,582 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.Button[2]"}
+2022-07-21 17:53:13,703 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 200 137
+2022-07-21 17:53:13,703 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 200 137
+2022-07-21 17:53:13,719 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:13,719 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:13,719 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element/a5bb7a98-4a62-4fd0-afc1-a155e8e5d982/click {"id": "a5bb7a98-4a62-4fd0-afc1-a155e8e5d982"}
+2022-07-21 17:53:13,719 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element/a5bb7a98-4a62-4fd0-afc1-a155e8e5d982/click {"id": "a5bb7a98-4a62-4fd0-afc1-a155e8e5d982"}
+2022-07-21 17:53:13,845 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element/a5bb7a98-4a62-4fd0-afc1-a155e8e5d982/click HTTP/1.1" 200 14
+2022-07-21 17:53:13,845 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element/a5bb7a98-4a62-4fd0-afc1-a155e8e5d982/click HTTP/1.1" 200 14
+2022-07-21 17:53:13,845 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:13,845 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:13,845 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:13,845 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:15,253 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:15,253 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:15,253 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:15,253 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:15,379 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:15,379 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:16,243 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:16,243 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:16,243 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:16,243 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:16,369 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:16,369 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:16,510 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:16,510 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:16,510 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:16,510 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:16,636 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:16,636 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:16,730 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:16,730 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:16,746 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:16,746 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:16,856 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:16,856 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:16,965 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:16,965 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:16,965 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:16,965 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:17,076 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:17,076 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:17,185 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:17,185 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:17,185 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:17,185 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:17,295 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:17,295 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:17,405 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:17,405 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:17,420 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:17,420 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:17,531 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:17,531 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:17,672 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:17,672 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:17,672 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:17,672 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:17,798 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:17,798 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:17,908 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:17,908 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:17,923 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:17,923 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:18,033 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:18,033 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:18,143 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:18,143 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:18,143 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:18,143 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:18,252 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:18,252 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:18,378 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:18,378 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:18,378 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:18,378 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:18,504 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:18,504 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:18,645 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:18,645 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:18,645 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:18,645 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:18,755 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:18,755 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:18,865 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:18,865 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:18,880 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:18,880 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:18,990 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:18,990 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:19,126 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:19,126 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:19,126 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:19,126 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:19,241 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:19,241 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:19,351 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:19,351 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:19,351 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:19,351 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:19,477 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:19,477 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:19,602 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:19,602 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:19,602 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:19,602 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:19,712 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:19,712 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:19,837 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:19,837 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:19,837 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:19,837 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:19,963 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:19,963 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:20,090 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:20,090 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:20,093 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:20,093 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:20,198 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:20,198 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:20,328 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:20,328 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:20,340 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:20,340 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:20,449 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:20,449 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:20,591 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:20,591 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:20,606 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:20,606 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:20,716 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:20,716 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:20,810 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:20,810 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:20,810 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:20,810 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:20,920 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:20,920 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:21,031 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:21,031 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:21,046 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:21,046 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:21,156 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:21,156 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:21,266 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:21,266 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:21,282 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:21,282 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:21,392 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:21,392 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:21,517 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:21,517 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:21,517 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:21,517 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:21,643 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:21,643 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:21,769 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:21,769 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:21,769 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:21,769 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:21,879 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:21,879 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:22,005 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:22,005 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:22,005 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:22,005 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:22,115 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:22,115 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:22,208 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:22,208 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:22,208 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:22,208 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:22,318 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:22,318 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:22,428 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:22,428 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:22,431 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:22,431 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:22,539 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:22,539 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:22,633 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:22,633 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:22,649 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:22,649 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:22,759 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:22,759 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:22,837 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:22,837 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:22,853 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:22,853 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:22,963 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:22,963 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:23,057 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:23,057 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:23,057 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:23,057 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:23,167 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:23,167 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:23,261 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:23,261 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:23,261 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:23,261 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:23,387 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:23,387 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:23,481 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:23,481 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:23,481 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:23,481 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:23,591 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:23,591 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:23,734 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:23,734 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:23,734 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:23,734 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:23,842 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:23,842 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:23,920 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:23,920 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:23,920 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:23,920 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:24,046 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:24,046 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:24,134 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:24,134 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:24,145 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:24,145 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:24,255 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:24,255 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:24,317 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:24,317 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:24,317 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:24,317 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:24,443 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:24,443 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:24,537 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:24,537 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:24,537 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:24,537 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:24,663 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:24,663 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:24,741 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:24,741 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:24,741 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:24,741 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:24,851 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:24,851 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:24,945 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:24,945 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:24,945 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:24,945 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:25,055 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:25,055 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:25,118 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:25,118 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:25,133 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:25,133 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:25,244 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:25,244 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:25,338 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:25,338 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:25,338 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:25,338 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:25,448 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:25,448 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:25,526 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:25,526 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:25,526 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:25,526 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:25,636 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:25,636 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:25,715 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:25,715 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 494
+2022-07-21 17:53:25,730 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:25,730 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:25,841 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:25,841 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:25,920 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:25,920 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:25,920 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:25,920 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:26,045 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:26,045 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:26,139 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:26,139 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:26,139 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:26,139 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:26,249 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:26,249 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:26,338 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:26,338 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:26,343 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:26,343 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:26,453 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:26,453 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:26,549 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:26,549 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:26,552 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:26,552 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:26,657 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:26,657 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:26,735 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:26,735 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:26,739 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:26,739 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:26,845 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:26,845 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:26,908 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:26,908 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:26,924 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:26,924 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:27,033 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:27,033 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:27,112 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:27,112 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:27,127 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:27,127 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:27,237 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:27,237 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:27,348 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:27,348 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:27,348 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:27,348 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:27,457 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:27,457 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:27,552 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:27,552 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:27,552 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:27,552 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:27,661 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:27,661 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:27,763 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:27,763 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:27,767 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:27,767 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:27,877 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:27,877 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:27,941 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:27,941 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:27,941 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:27,941 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:28,066 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:28,066 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:28,129 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:28,129 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:28,129 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:28,129 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:28,255 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:28,255 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:28,334 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:28,334 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:28,334 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:28,334 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:28,444 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:28,444 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:28,506 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:28,506 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:28,506 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:28,506 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:28,616 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:28,616 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:28,663 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:28,663 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:28,663 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:28,663 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:28,773 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:28,773 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:28,843 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:28,843 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:28,843 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:28,843 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:28,962 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:28,962 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:29,025 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:29,025 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:29,025 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:29,025 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:29,135 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:29,135 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:29,213 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:29,213 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:29,213 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:29,213 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:29,339 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:29,339 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:29,402 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:29,402 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:29,418 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:29,418 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:29,528 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:29,528 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:29,591 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:29,591 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:29,591 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:29,591 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:29,701 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:29,701 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:29,748 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:29,748 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:29,764 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:29,764 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:29,874 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:29,874 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:29,945 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:29,945 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:29,945 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:29,945 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:30,064 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:30,064 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:30,126 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:30,126 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:30,126 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:30,126 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:30,236 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:30,236 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:30,314 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:30,314 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:30,314 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:30,314 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:30,424 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:30,424 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:30,471 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:30,471 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:30,471 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:30,471 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:30,597 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:30,597 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:30,660 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:30,660 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:30,660 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:30,660 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:30,770 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:30,770 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:30,848 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:30,848 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:30,848 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:30,848 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:30,958 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:30,958 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:31,005 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:31,005 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:31,005 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:31,005 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:31,131 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:31,131 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:31,209 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:31,209 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:31,209 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:31,209 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:31,319 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:31,319 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:31,382 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:31,382 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:31,382 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:31,382 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:31,492 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:31,492 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:31,555 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:31,555 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:31,555 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:31,555 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:31,665 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:31,665 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:31,727 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:31,727 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:31,727 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:31,727 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:31,837 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:31,837 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:31,900 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:31,900 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:31,900 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:31,900 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:32,010 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:32,010 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:32,073 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:32,073 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:32,073 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:32,073 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:32,198 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:32,198 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:32,249 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:32,249 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:32,249 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:32,249 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:32,356 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:32,356 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:32,418 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:32,418 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:32,418 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:32,418 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:32,544 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:32,544 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:32,591 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:32,591 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:32,591 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:32,591 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:32,701 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:32,701 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:32,750 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:32,750 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:32,764 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:32,764 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:32,874 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:32,874 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:32,952 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:32,952 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:32,952 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:32,952 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:33,062 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:33,062 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:33,125 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:33,125 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:33,140 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:33,140 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:33,250 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:33,250 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:33,313 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:33,313 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:33,313 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:33,313 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:33,423 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:33,423 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:33,486 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:33,486 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:33,486 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:33,486 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:33,596 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:33,596 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:33,659 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:33,659 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:33,659 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:33,659 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:33,769 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:33,769 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:33,816 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:33,816 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:33,831 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:33,831 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:33,941 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:33,941 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:34,004 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:34,004 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:34,004 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:34,004 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:34,114 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:34,114 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:34,161 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:34,161 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:34,177 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:34,177 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:34,287 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:34,287 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:34,333 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:34,333 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:34,353 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:34,353 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:34,459 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:34,459 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:34,522 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:34,522 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:34,522 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:34,522 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:34,647 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:34,647 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:34,694 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:34,694 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:34,694 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:34,694 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:34,805 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:34,805 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:34,883 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:34,883 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:34,883 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:34,883 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:34,993 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:34,993 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:35,040 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:35,040 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:35,040 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:35,040 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:35,150 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:35,150 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:35,197 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:35,197 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:35,213 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:35,213 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:35,323 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:35,323 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:35,370 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:35,370 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:35,370 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:35,370 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:35,480 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:35,480 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:35,542 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:35,542 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:35,558 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:35,558 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:35,669 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:35,669 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:35,747 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:35,747 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:35,755 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:35,755 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:35,857 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:35,857 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:35,920 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:35,920 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:35,935 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:35,935 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:36,045 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:36,045 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:36,108 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:36,108 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:36,108 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:36,108 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:36,218 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:36,218 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:36,281 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:36,281 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:36,281 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:36,281 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:36,391 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:36,391 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:36,456 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:36,456 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:36,456 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:36,456 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:36,579 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:36,579 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:36,626 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:36,626 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:36,641 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:36,641 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:36,751 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:36,751 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:36,813 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:36,813 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:36,813 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:36,813 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:36,939 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:36,939 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:36,986 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:36,986 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:36,986 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:36,986 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:37,096 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:37,096 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:37,158 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:37,158 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:37,158 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:37,158 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:37,268 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:37,268 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:37,315 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:37,315 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:37,315 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:37,315 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:37,425 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:37,425 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:37,488 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:37,488 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:37,488 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:37,488 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:37,598 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:37,598 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:37,661 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:37,661 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:37,661 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:37,661 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:37,771 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:37,771 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:37,834 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:37,834 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:37,834 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:37,834 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:37,944 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:37,944 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:38,022 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:38,022 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:38,022 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:38,022 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:38,132 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:38,132 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:38,179 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:38,179 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:38,195 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:38,195 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:38,305 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:38,305 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:38,362 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:38,362 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:38,368 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:38,368 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:38,477 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:38,477 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:38,540 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:38,540 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:38,540 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:38,540 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:38,666 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:38,666 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:38,713 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:38,713 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:38,728 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:38,728 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:38,841 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:38,841 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:38,872 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:38,872 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:38,888 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:38,888 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:38,998 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:38,998 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:39,062 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:39,062 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:39,076 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:39,076 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:39,186 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:39,186 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:39,233 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:39,233 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:39,249 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:39,249 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:39,359 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:39,359 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:39,421 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:39,421 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:39,421 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:39,421 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:39,531 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:39,531 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:39,594 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:39,594 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:39,594 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:39,594 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:39,704 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:39,704 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:39,751 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:39,751 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:39,751 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:39,751 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:39,877 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:39,877 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:39,940 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:39,940 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:39,940 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:39,940 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:40,050 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:40,050 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:40,097 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:40,097 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:40,097 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:40,097 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:40,207 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:40,207 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:40,285 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:40,285 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:40,285 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:40,285 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:40,395 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:40,395 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:40,442 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:40,442 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:40,442 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:40,442 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:40,552 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:40,552 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:40,599 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:40,599 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:40,599 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:40,599 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:40,709 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:40,709 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:40,756 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:40,756 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:40,766 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:40,766 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:40,882 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:40,882 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:40,944 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:40,944 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:40,944 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:40,944 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:41,054 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:41,054 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:41,102 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:41,102 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:41,102 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:41,102 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:41,227 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:41,227 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:41,275 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:41,275 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:41,291 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:41,291 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:41,401 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:41,401 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:41,464 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:41,464 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:41,467 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:41,467 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:41,574 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:41,574 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:41,621 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:41,621 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:41,621 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:41,621 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:41,731 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:41,731 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:41,778 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:41,778 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:41,794 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:41,794 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:41,904 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:41,904 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:41,951 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:41,951 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:41,968 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:41,968 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:42,077 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:42,077 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:42,124 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:42,124 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:42,124 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:42,124 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:42,249 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:42,249 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:42,297 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:42,297 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:42,297 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:42,297 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:42,407 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:42,407 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:42,469 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:42,469 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:42,470 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:42,470 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:42,580 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:42,580 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:42,627 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:42,627 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:42,627 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:42,627 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:42,736 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:42,736 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:42,784 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:42,784 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:42,784 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:42,784 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:42,893 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:42,893 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:42,940 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:42,940 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:42,940 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:42,940 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:43,050 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:43,050 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:43,082 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:43,082 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:43,098 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:43,098 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:43,207 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:43,207 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:43,254 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:43,254 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:43,254 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:43,254 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:43,364 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:43,364 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:43,395 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:43,395 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:43,411 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:43,411 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:43,521 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:43,521 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:43,583 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:43,583 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:43,583 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:43,583 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:43,693 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:43,693 DEBUG [remote_connection.py(_request:388)] - POST http://127.0.0.1:4723/wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element {"using": "xpath", "value": "//android.view.View[@content-desc=\"\u661f\u6c49\u707f\u70c2\"]"}
+2022-07-21 17:53:43,740 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:43,740 DEBUG [connectionpool.py(_make_request:465)] - http://127.0.0.1:4723 "POST /wd/hub/session/c9eff3fb-ee0a-42b5-a3cf-0851ebcfa1bb/element HTTP/1.1" 404 530
+2022-07-21 17:53:43,740 DEBUG [remote_connection.py(_request:440)] - Finished Request
+2022-07-21 17:53:43,740 DEBUG [remote_connection.py(_request:440)] - Finished Request

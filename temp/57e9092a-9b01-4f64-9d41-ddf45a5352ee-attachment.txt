@@ -1,0 +1,10 @@
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:412 POST http://192.168.18.61:4723/wd/hub/session/bdf47014-24f9-4eda-aa8b-9976398ff057/element {"using": "xpath", "value": "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout[2]/android.widget.FrameLayout[1]/android.widget.TextView"}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 "POST /wd/hub/session/bdf47014-24f9-4eda-aa8b-9976398ff057/element HTTP/1.1" 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:463 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:412 POST http://192.168.18.61:4723/wd/hub/session/bdf47014-24f9-4eda-aa8b-9976398ff057/element {"using": "xpath", "value": "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout[1]/android.widget.ImageView"}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 "POST /wd/hub/session/bdf47014-24f9-4eda-aa8b-9976398ff057/element HTTP/1.1" 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:463 Finished Request
+[32mINFO    [0m root:loging.py:33 进入一键诊断页面正确
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:412 DELETE http://192.168.18.61:4723/wd/hub/session/bdf47014-24f9-4eda-aa8b-9976398ff057 {}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 "DELETE /wd/hub/session/bdf47014-24f9-4eda-aa8b-9976398ff057 HTTP/1.1" 200 14
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:463 Finished Request
