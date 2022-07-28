@@ -1,14 +1,13 @@
 import os
 import sys
+object_path = os.path.join(os.path.abspath(os.path.dirname(os.path.dirname(__file__))))
+sys.path.append(object_path)
+from common.driver_tool import DriverTool
 from common.loging import log
 from base.app_base_page import AppBasePage
 from page.akeydiagnostic.Network import CNetwork
 from page.akeydiagnostic.logget import Clogget
 from page.akeydiagnostic.Network_details import CNetwork_details
-
-object_path = os.path.join(os.path.abspath(os.path.dirname(os.path.dirname(__file__))))
-sys.path.append(object_path)
-from common.driver_tool import DriverTool
 
 
 class Test_akeydiagnostic(AppBasePage):
