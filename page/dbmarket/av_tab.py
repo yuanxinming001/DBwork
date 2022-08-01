@@ -10,7 +10,7 @@ class Cav_tab(AppBasePage):
         # (页面左侧一列数据元素)
         # --------------------------------------------------------------------------------
         # 视频点播 Video on demand
-        self.Video_on_demand = (MobileBy.XPATH, '/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout'
+        self.Video_on_demand =(MobileBy.XPATH, '/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout'
                                                 '/android.widget.FrameLayout/android.widget.RelativeLayout/android'
                                                 '.support.v4.view.ViewPager/android.widget.HorizontalScrollView/android.widget.RelativeLayout/android.widget.ImageView[1]')
 

@@ -1,4 +1,5 @@
 import os
+import time
 
 # 遥控器操作 up, down, left, right, back, backhome, ok
 def remotecontrol(send):
@@ -39,6 +40,16 @@ def remotecontrol(send):
         # left2 执行两次
         os.system('adb shell input keyevent 21')
         os.system('adb shell input keyevent 21')
+
+    if send == 'right4':
+        os.system('adb shell input keyevent 22')
+        time.sleep(1)
+        os.system('adb shell input keyevent 22')
+        time.sleep(1)
+        os.system('adb shell input keyevent 22')
+        time.sleep(1)
+        os.system('adb shell input keyevent 22')
+
 
 
 

@@ -6,7 +6,6 @@ from selenium.webdriver.common.by import By
 class DriverTool(object):
     # app打开的会话
     app_driver = None
-
     @classmethod
     def get_app_driver(cls, package, activity):
         cls.app_driver = app.Remote("http://192.168.18.61:4723/wd/hub", {
