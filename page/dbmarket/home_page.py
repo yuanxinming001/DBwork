@@ -65,7 +65,6 @@ class Chomepage(AppBasePage):
 
     # 判断冷启动：跳过弹窗、下载弹窗、同意协议弹窗方法
     def judge_agree_button(self):
-        print('123')
         get_agree_button = self.search_element(self.agree_button)
         if get_agree_button:
             self.search_element(self.agree_button).click()

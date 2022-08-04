@@ -45,6 +45,13 @@ class Cfind_tab(AppBasePage):
         self.top3_resources_6 = (MobileBy.XPATH,
                                  '/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.support.v4.view.ViewPager/android.widget.ScrollView/android.widget.RelativeLayout/android.widget.ImageView[12]')
 
+        # 装机必备详情页面 影音 av title 换按钮
+        self.top3_resources_2_avtitle = (MobileBy.XPATH, '/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.RelativeLayout/android.widget.RelativeLayout[14]/android.widget.TextView')
+
+
+
+
+
     # 点击一排资源位置第一个元素(top1:页面第一排。resources：资源内容 one：一排第一个 two就是第二个)
     def check_top1_resources_one(self):
         self.search_element(self.top1_resources_one).click()
@@ -52,4 +59,28 @@ class Cfind_tab(AppBasePage):
     # 点击二排推荐app资源位的第1个元素
     def click_top2_resources_1(self):
         self.search_element(self.top2_resources_1).click()
+
+    # 检查第三排搜索模块点击跳转页面正确 click_top3_resources_1
+    def click_top3_resources_1(self):
+        self.search_element(self.top3_resources_1).click()
+
+    # 检查第三排装机必备模块点击跳转页面正确 click_top3_resources_2
+    def click_top3_resources_2(self, rz = log()):
+        self.search_element(self.top3_resources_2).click()
+        res_avtitle = self.search_element(self.top3_resources_2_avtitle)
+        if res_avtitle:
+            rz.info('点击第三排装机必备模块点击跳转页面正确')
+        else:
+            rz.info('error: 点击第三排装机必备模块点击跳转页面异常，请人工检查')
+
+    # 检查第三排运动健康模块点击跳转页面正确 click_top3_resources_3
+    def click_top3_resources_3(self, rz = log()):
+        self.search_element(self.top3_resources_3).click()
+
+
+
+
+
+
+
 

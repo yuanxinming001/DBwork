@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>Test Report</title>
+    <link href="assets/style.css" rel="stylesheet" type="text/css"/></head>
+  <body onLoad="init()">
+    <script>/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this file,
+ * You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+
+function toArray(iter) {
+    if (iter === null) {
+        return null;
+    }
+    return Array.prototype.slice.call(iter);
+}
+
+function find(selector, elem) {
+    if (!elem) {
+        elem = document;
+    }
+    return elem.querySelector(selector);
+}
+
+function find_all(selector, elem) {
+    if (!elem) {
+        elem = document;
+    }
+    return toArray(elem.querySelectorAll(selector));
+}
+
+function sort_column(elem) {
+    toggle_sort_states(elem);
+    var colIndex = toArray(elem.parentNode.childNodes).indexOf(elem);
+    var key;
+    if (elem.classList.contains('numeric')) {
+        key = key_num;
+    } else if (elem.classList.contains('result')) {
+        key = key_result;
+    } else {
+        key = key_alpha;
+    }
+    sort_table(elem, key(colIndex));
+}
+
+function show_all_extras() {
+    find_all('.col-result').forEach(show_extras);
+}
+
+function hide_all_extras() {
+    find_all('.col-result').forEach(hide_extras);
+}
+
+function show_extras(colresult_elem) {
+    var extras = colresult_elem.parentNode.nextElementSibling;
+    var expandcollapse = colresult_elem.firstElementChild;
+    extras.classList.remove("collapsed");
+    expandcollapse.classList.remove("expander");
+    expandcollapse.classList.add("collapser");
+}
+
+function hide_extras(colresult_elem) {
+    var extras = colresult_elem.parentNode.nextElementSibling;
+    var expandcollapse = colresult_elem.firstElementChild;
+    extras.classList.add("collapsed");
+    expandcollapse.classList.remove("collapser");
+    expandcollapse.classList.add("expander");
+}
+
+function show_filters() {
+    var filter_items = document.getElementsByClassName('filter');
+    for (var i = 0; i < filter_items.length; i++)
+        filter_items[i].hidden = false;
+}
+
+function add_collapse() {
+    // Add links for show/hide all
+    var resulttable = find('table#results-table');
+    var showhideall = document.createElement("p");
+    showhideall.innerHTML = '<a href="javascript:show_all_extras()">Show all details</a> / ' +
+                            '<a href="javascript:hide_all_extras()">Hide all details</a>';
+    resulttable.parentElement.insertBefore(showhideall, resulttable);
+
+    // Add show/hide link to each result
+    find_all('.col-result').forEach(function(elem) {
+        var collapsed = get_query_parameter('collapsed') || 'Passed';
+        var extras = elem.parentNode.nextElementSibling;
+        var expandcollapse = document.createElement("span");
+        if (collapsed.includes(elem.innerHTML)) {
+            extras.classList.add("collapsed");
+            expandcollapse.classList.add("expander");
+        } else {
+            expandcollapse.classList.add("collapser");
+        }
+        elem.appendChild(expandcollapse);
+
+        elem.addEventListener("click", function(event) {
+            if (event.currentTarget.parentNode.nextElementSibling.classList.contains("collapsed")) {
+                show_extras(event.currentTarget);
+            } else {
+                hide_extras(event.currentTarget);
+            }
+        });
+    })
+}
+
+function get_query_parameter(name) {
+    var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
+    return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+}
+
+function init () {
+    reset_sort_headers();
+
+    add_collapse();
+
+    show_filters();
+
+    sort_column(find('.initial-sort'));
+
+    find_all('.sortable').forEach(function(elem) {
+        elem.addEventListener("click",
+                              function(event) {
+                                  sort_column(elem);
+                              }, false)
+    });
+
+};
+
+function sort_table(clicked, key_func) {
+    var rows = find_all('.results-table-row');
+    var reversed = !clicked.classList.contains('asc');
+    var sorted_rows = sort(rows, key_func, reversed);
+    /* Whole table is removed here because browsers acts much slower
+     * when appending existing elements.
+     */
+    var thead = document.getElementById("results-table-head");
+    document.getElementById('results-table').remove();
+    var parent = document.createElement("table");
+    parent.id = "results-table";
+    parent.appendChild(thead);
+    sorted_rows.forEach(function(elem) {
+        parent.appendChild(elem);
+    });
+    document.getElementsByTagName("BODY")[0].appendChild(parent);
+}
+
+function sort(items, key_func, reversed) {
+    var sort_array = items.map(function(item, i) {
+        return [key_func(item), i];
+    });
+
+    sort_array.sort(function(a, b) {
+        var key_a = a[0];
+        var key_b = b[0];
+
+        if (key_a == key_b) return 0;
+
+        if (reversed) {
+            return (key_a < key_b ? 1 : -1);
+        } else {
+            return (key_a > key_b ? 1 : -1);
+        }
+    });
+
+    return sort_array.map(function(item) {
+        var index = item[1];
+        return items[index];
+    });
+}
+
+function key_alpha(col_index) {
+    return function(elem) {
+        return elem.childNodes[1].childNodes[col_index].firstChild.data.toLowerCase();
+    };
+}
+
+function key_num(col_index) {
+    return function(elem) {
+        return parseFloat(elem.childNodes[1].childNodes[col_index].firstChild.data);
+    };
+}
+
+function key_result(col_index) {
+    return function(elem) {
+        var strings = ['Error', 'Failed', 'Rerun', 'XFailed', 'XPassed',
+                       'Skipped', 'Passed'];
+        return strings.indexOf(elem.childNodes[1].childNodes[col_index].firstChild.data);
+    };
+}
+
+function reset_sort_headers() {
+    find_all('.sort-icon').forEach(function(elem) {
+        elem.parentNode.removeChild(elem);
+    });
+    find_all('.sortable').forEach(function(elem) {
+        var icon = document.createElement("div");
+        icon.className = "sort-icon";
+        icon.textContent = "vvv";
+        elem.insertBefore(icon, elem.firstChild);
+        elem.classList.remove("desc", "active");
+        elem.classList.add("asc", "inactive");
+    });
+}
+
+function toggle_sort_states(elem) {
+    //if active, toggle between asc and desc
+    if (elem.classList.contains('active')) {
+        elem.classList.toggle('asc');
+        elem.classList.toggle('desc');
+    }
+
+    //if inactive, reset all other functions and add ascending active
+    if (elem.classList.contains('inactive')) {
+        reset_sort_headers();
+        elem.classList.remove('inactive');
+        elem.classList.add('active');
+    }
+}
+
+function is_all_rows_hidden(value) {
+  return value.hidden == false;
+}
+
+function filter_table(elem) {
+    var outcome_att = "data-test-result";
+    var outcome = elem.getAttribute(outcome_att);
+    class_outcome = outcome + " results-table-row";
+    var outcome_rows = document.getElementsByClassName(class_outcome);
+
+    for(var i = 0; i < outcome_rows.length; i++){
+        outcome_rows[i].hidden = !elem.checked;
+    }
+
+    var rows = find_all('.results-table-row').filter(is_all_rows_hidden);
+    var all_rows_hidden = rows.length == 0 ? true : false;
+    var not_found_message = document.getElementById("not-found-message");
+    not_found_message.hidden = !all_rows_hidden;
+}
+</script>
+    <h1>report.html</h1>
+    <p>Report generated on 01-Aug-2022 at 18:01:50 by <a href="https://pypi.python.org/pypi/pytest-html">pytest-html</a> v3.1.1</p>
+    <h2>Environment</h2>
+    <table id="environment">
+      <tr>
+        <td>Packages</td>
+        <td>{&apos;pytest&apos;: &apos;6.2.5&apos;, &apos;py&apos;: &apos;1.10.0&apos;, &apos;pluggy&apos;: &apos;1.0.0&apos;}</td></tr>
+      <tr>
+        <td>Platform</td>
+        <td>macOS-10.16-x86_64-i386-64bit</td></tr>
+      <tr>
+        <td>Plugins</td>
+        <td>{&apos;html&apos;: &apos;2.0.1&apos;, &apos;rerunfailures&apos;: &apos;10.2&apos;, &apos;appiumbase&apos;: &apos;0.1.1&apos;, &apos;metadata&apos;: &apos;1.11.0&apos;, &apos;xdist&apos;: &apos;2.4.0&apos;, &apos;ordering&apos;: &apos;0.6&apos;, &apos;forked&apos;: &apos;1.3.0&apos;, &apos;allure-pytest&apos;: &apos;2.9.43&apos;}</td></tr>
+      <tr>
+        <td>Python</td>
+        <td>3.9.6</td></tr></table>
+    <h2>Summary</h2>
+    <p>16 tests ran in 510.80 seconds. </p>
+    <p class="filter" hidden="true">(Un)check the boxes to filter the results.</p><input checked="true" class="filter" data-test-result="passed" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="passed">13 passed</span>, <input checked="true" class="filter" data-test-result="skipped" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="skipped">0 skipped</span>, <input checked="true" class="filter" data-test-result="failed" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="failed">3 failed</span>, <input checked="true" class="filter" data-test-result="error" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="error">0 errors</span>, <input checked="true" class="filter" data-test-result="xfailed" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="xfailed">0 expected failures</span>, <input checked="true" class="filter" data-test-result="xpassed" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="xpassed">0 unexpected passes</span>, <input checked="true" class="filter" data-test-result="rerun" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="rerun">0 rerun</span>
+    <h2>Results</h2>
+    <table id="results-table">
+      <thead id="results-table-head">
+        <tr>
+          <th class="sortable result initial-sort" col="result">Result</th>
+          <th class="sortable" col="name">Test</th>
+          <th class="sortable numeric" col="duration">Duration</th>
+          <th>Links</th></tr>
+        <tr hidden="true" id="not-found-message">
+          <th colspan="4">No results found. Try to check the filters</th></tr></thead>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-name">Testcase/testcase_Dbmarket.py::Test_dbmarket::test05</td>
+          <td class="col-duration">6.75</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;testcase_Dbmarket.Test_dbmarket object at 0x7fdb7fbc11f0&gt;<br/><br/>    @allure.title(&#x27;检查播影视模块资源页面，点击更多电影tab，跳转页面正确&#x27;)<br/>    def test05(self):<br/>        homepage = Chomepage()<br/>        homepage.goto_my_tab()<br/>        my_tab = Cmy_tab()<br/>        my_tab.click_hotavlist()<br/>        remotecontrol(send=&#x27;right&#x27;)<br/>        my_tab.click_more_mv()<br/>        app_details = Capp_details()<br/>&gt;       app_details.check_history()<br/><br/>Testcase/testcase_Dbmarket.py:86: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;page.dbmarket.app_details.Capp_details object at 0x7fdb7fbc81f0&gt;<br/><br/>    def check_history(self):<br/>        res = self.search_element(self.history_version)<br/>        if res:<br/>&gt;           rz.info(&#x27;成功跳转到下载应用详情页面&#x27;)<br/><span class="error">E           TypeError: info() missing 1 required positional argument: &#x27;message&#x27;</span><br/><br/>page/dbmarket/app_details.py:56: TypeError<br/> -------------------------------Captured log setup------------------------------- <br/>[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session {&quot;capabilities&quot;: {&quot;firstMatch&quot;: [{&quot;platformName&quot;: &quot;Android&quot;, &quot;appium:platformVersion&quot;: &quot;11&quot;, &quot;appium:deviceName&quot;: &quot;Android&quot;, &quot;appium:appPackage&quot;: &quot;com.dangbeimarket&quot;, &quot;appium:appActivity&quot;: &quot;.activity.WelcomeActivity&quot;, &quot;appium:unicodeKeyboard&quot;: true, &quot;appium:resetKeyboard&quot;: true}]}, &quot;desiredCapabilities&quot;: {&quot;platformName&quot;: &quot;Android&quot;, &quot;platformVersion&quot;: &quot;11&quot;, &quot;deviceName&quot;: &quot;Android&quot;, &quot;appPackage&quot;: &quot;com.dangbeimarket&quot;, &quot;appActivity&quot;: &quot;.activity.WelcomeActivity&quot;, &quot;unicodeKeyboard&quot;: true, &quot;resetKeyboard&quot;: true}}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:227 Starting new HTTP connection (1): 192.168.18.61:4723
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session HTTP/1.1&quot; 200 939
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/1bcf2d13-17e0-4fdc-8e52-1281784e8f55/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.RelativeLayout[2]/android.widget.TextView[1]&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/1bcf2d13-17e0-4fdc-8e52-1281784e8f55/element HTTP/1.1&quot; 404 493
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/1bcf2d13-17e0-4fdc-8e52-1281784e8f55/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.RelativeLayout[2]/android.widget.TextView[1]&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/1bcf2d13-17e0-4fdc-8e52-1281784e8f55/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/1bcf2d13-17e0-4fdc-8e52-1281784e8f55/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.RelativeLayout[2]/android.widget.TextView[1]&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/1bcf2d13-17e0-4fdc-8e52-1281784e8f55/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/1bcf2d13-17e0-4fdc-8e52-1281784e8f55/element/ca265fc9-127a-4553-a835-abb670cd1b10/click {&quot;id&quot;: &quot;ca265fc9-127a-4553-a835-abb670cd1b10&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/1bcf2d13-17e0-4fdc-8e52-1281784e8f55/element/ca265fc9-127a-4553-a835-abb670cd1b10/click HTTP/1.1&quot; 200 14
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/1bcf2d13-17e0-4fdc-8e52-1281784e8f55/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.support.v4.view.ViewPager/android.widget.HorizontalScrollView/android.widget.RelativeLayout/android.widget.ImageView[9]&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/1bcf2d13-17e0-4fdc-8e52-1281784e8f55/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/1bcf2d13-17e0-4fdc-8e52-1281784e8f55/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.support.v4.view.ViewPager/android.widget.HorizontalScrollView/android.widget.RelativeLayout/android.widget.ImageView[9]&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/1bcf2d13-17e0-4fdc-8e52-1281784e8f55/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/1bcf2d13-17e0-4fdc-8e52-1281784e8f55/element/435d1c21-ed74-4079-bfe9-4f85f26fc484/click {&quot;id&quot;: &quot;435d1c21-ed74-4079-bfe9-4f85f26fc484&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/1bcf2d13-17e0-4fdc-8e52-1281784e8f55/element/435d1c21-ed74-4079-bfe9-4f85f26fc484/click HTTP/1.1&quot; 200 14
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request<br/> -------------------------------Captured log call-------------------------------- <br/>[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/1bcf2d13-17e0-4fdc-8e52-1281784e8f55/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.HorizontalScrollView/android.widget.RelativeLayout/android.widget.ImageView[1]&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/1bcf2d13-17e0-4fdc-8e52-1281784e8f55/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/1bcf2d13-17e0-4fdc-8e52-1281784e8f55/element/9cdc6140-d171-4df6-8f61-d85ea92b5e89/click {&quot;id&quot;: &quot;9cdc6140-d171-4df6-8f61-d85ea92b5e89&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/1bcf2d13-17e0-4fdc-8e52-1281784e8f55/element/9cdc6140-d171-4df6-8f61-d85ea92b5e89/click HTTP/1.1&quot; 200 14
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/1bcf2d13-17e0-4fdc-8e52-1281784e8f55/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.support.v4.view.ViewPager/android.widget.ScrollView/android.widget.RelativeLayout/android.widget.RelativeLayout[1]/android.widget.ImageView&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/1bcf2d13-17e0-4fdc-8e52-1281784e8f55/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/1bcf2d13-17e0-4fdc-8e52-1281784e8f55/element/8e1f0ee3-f4ae-4958-9198-01604f5ccce7/click {&quot;id&quot;: &quot;8e1f0ee3-f4ae-4958-9198-01604f5ccce7&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/1bcf2d13-17e0-4fdc-8e52-1281784e8f55/element/8e1f0ee3-f4ae-4958-9198-01604f5ccce7/click HTTP/1.1&quot; 200 14
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/1bcf2d13-17e0-4fdc-8e52-1281784e8f55/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.HorizontalScrollView/android.widget.RelativeLayout/android.widget.RelativeLayout[25]/android.widget.TextView&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/1bcf2d13-17e0-4fdc-8e52-1281784e8f55/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/1bcf2d13-17e0-4fdc-8e52-1281784e8f55/element/60d2f74f-f4fe-4dda-bb3d-98e373d70312/click {&quot;id&quot;: &quot;60d2f74f-f4fe-4dda-bb3d-98e373d70312&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/1bcf2d13-17e0-4fdc-8e52-1281784e8f55/element/60d2f74f-f4fe-4dda-bb3d-98e373d70312/click HTTP/1.1&quot; 200 14
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/1bcf2d13-17e0-4fdc-8e52-1281784e8f55/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.support.v7.widget.RecyclerView/android.widget.RelativeLayout[1]/android.view.View[9]&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/1bcf2d13-17e0-4fdc-8e52-1281784e8f55/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-name">Testcase/testcase_Dbmarket.py::Test_dbmarket::test08</td>
+          <td class="col-duration">5.46</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;testcase_Dbmarket.Test_dbmarket object at 0x7fdb7fbf0910&gt;<br/><br/>    @allure.title(&#x27;检查发现页面推荐app的资源内容，点击可以跳转下载app页面&#x27;)<br/>    def test08(self):<br/>        homepage = Chomepage()<br/>        homepage.goto_find_tab()<br/>        app_details = Capp_details()<br/>        find_tab = Cfind_tab()<br/>        find_tab.check_top1_resources_one()<br/>&gt;       app_details.check_history()<br/><br/>Testcase/testcase_Dbmarket.py:113: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;page.dbmarket.app_details.Capp_details object at 0x7fdb7fbfbd30&gt;<br/><br/>    def check_history(self):<br/>        res = self.search_element(self.history_version)<br/>        if res:<br/>&gt;           rz.info(&#x27;成功跳转到下载应用详情页面&#x27;)<br/><span class="error">E           TypeError: info() missing 1 required positional argument: &#x27;message&#x27;</span><br/><br/>page/dbmarket/app_details.py:56: TypeError<br/> -------------------------------Captured log setup------------------------------- <br/>[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session {&quot;capabilities&quot;: {&quot;firstMatch&quot;: [{&quot;platformName&quot;: &quot;Android&quot;, &quot;appium:platformVersion&quot;: &quot;11&quot;, &quot;appium:deviceName&quot;: &quot;Android&quot;, &quot;appium:appPackage&quot;: &quot;com.dangbeimarket&quot;, &quot;appium:appActivity&quot;: &quot;.activity.WelcomeActivity&quot;, &quot;appium:unicodeKeyboard&quot;: true, &quot;appium:resetKeyboard&quot;: true}]}, &quot;desiredCapabilities&quot;: {&quot;platformName&quot;: &quot;Android&quot;, &quot;platformVersion&quot;: &quot;11&quot;, &quot;deviceName&quot;: &quot;Android&quot;, &quot;appPackage&quot;: &quot;com.dangbeimarket&quot;, &quot;appActivity&quot;: &quot;.activity.WelcomeActivity&quot;, &quot;unicodeKeyboard&quot;: true, &quot;resetKeyboard&quot;: true}}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:227 Starting new HTTP connection (1): 192.168.18.61:4723
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session HTTP/1.1&quot; 200 939
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/277e089b-534b-4c70-a7bc-2f063ebfbc69/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.RelativeLayout[2]/android.widget.TextView[1]&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/277e089b-534b-4c70-a7bc-2f063ebfbc69/element HTTP/1.1&quot; 404 493
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/277e089b-534b-4c70-a7bc-2f063ebfbc69/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.RelativeLayout[2]/android.widget.TextView[1]&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/277e089b-534b-4c70-a7bc-2f063ebfbc69/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/277e089b-534b-4c70-a7bc-2f063ebfbc69/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.RelativeLayout[2]/android.widget.TextView[1]&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/277e089b-534b-4c70-a7bc-2f063ebfbc69/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/277e089b-534b-4c70-a7bc-2f063ebfbc69/element/19d68b60-d1b0-4f84-acab-c482b47228e2/click {&quot;id&quot;: &quot;19d68b60-d1b0-4f84-acab-c482b47228e2&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/277e089b-534b-4c70-a7bc-2f063ebfbc69/element/19d68b60-d1b0-4f84-acab-c482b47228e2/click HTTP/1.1&quot; 200 14
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/277e089b-534b-4c70-a7bc-2f063ebfbc69/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.support.v4.view.ViewPager/android.widget.HorizontalScrollView/android.widget.RelativeLayout/android.widget.ImageView[9]&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/277e089b-534b-4c70-a7bc-2f063ebfbc69/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/277e089b-534b-4c70-a7bc-2f063ebfbc69/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.support.v4.view.ViewPager/android.widget.HorizontalScrollView/android.widget.RelativeLayout/android.widget.ImageView[9]&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/277e089b-534b-4c70-a7bc-2f063ebfbc69/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/277e089b-534b-4c70-a7bc-2f063ebfbc69/element/16079598-01e7-4abf-9956-0307aa8f1b1d/click {&quot;id&quot;: &quot;16079598-01e7-4abf-9956-0307aa8f1b1d&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/277e089b-534b-4c70-a7bc-2f063ebfbc69/element/16079598-01e7-4abf-9956-0307aa8f1b1d/click HTTP/1.1&quot; 200 14
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request<br/> -------------------------------Captured log call-------------------------------- <br/>[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/277e089b-534b-4c70-a7bc-2f063ebfbc69/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.HorizontalScrollView/android.widget.RelativeLayout/android.widget.ImageView[2]&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/277e089b-534b-4c70-a7bc-2f063ebfbc69/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/277e089b-534b-4c70-a7bc-2f063ebfbc69/element/5403f4c4-0959-464c-aeb0-6489cb2c6f38/click {&quot;id&quot;: &quot;5403f4c4-0959-464c-aeb0-6489cb2c6f38&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/277e089b-534b-4c70-a7bc-2f063ebfbc69/element/5403f4c4-0959-464c-aeb0-6489cb2c6f38/click HTTP/1.1&quot; 200 14
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/277e089b-534b-4c70-a7bc-2f063ebfbc69/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.support.v4.view.ViewPager/android.widget.ScrollView/android.widget.RelativeLayout/android.widget.ImageView[1]&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/277e089b-534b-4c70-a7bc-2f063ebfbc69/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/277e089b-534b-4c70-a7bc-2f063ebfbc69/element/6ce72c0d-8725-4506-8143-48883c8d0d1f/click {&quot;id&quot;: &quot;6ce72c0d-8725-4506-8143-48883c8d0d1f&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/277e089b-534b-4c70-a7bc-2f063ebfbc69/element/6ce72c0d-8725-4506-8143-48883c8d0d1f/click HTTP/1.1&quot; 200 14
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/277e089b-534b-4c70-a7bc-2f063ebfbc69/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.support.v7.widget.RecyclerView/android.widget.RelativeLayout[1]/android.view.View[9]&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/277e089b-534b-4c70-a7bc-2f063ebfbc69/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-name">Testcase/testcase_Dbmarket.py::Test_dbmarket::test09</td>
+          <td class="col-duration">4.27</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;testcase_Dbmarket.Test_dbmarket object at 0x7fdb7fbfbca0&gt;<br/><br/>    @allure.title(&#x27;检查发现页面二排推荐app显示正确，点击可以跳转正确页面&#x27;)<br/>    def test09(self):<br/>        homepage = Chomepage()<br/>        homepage.goto_find_tab()<br/>        app_details = Capp_details()<br/>        find_tab = Cfind_tab()<br/>        find_tab.click_top2_resources_1()<br/>&gt;       app_details.check_history()<br/><br/>Testcase/testcase_Dbmarket.py:122: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;page.dbmarket.app_details.Capp_details object at 0x7fdb7fbfa6d0&gt;<br/><br/>    def check_history(self):<br/>        res = self.search_element(self.history_version)<br/>        if res:<br/>&gt;           rz.info(&#x27;成功跳转到下载应用详情页面&#x27;)<br/><span class="error">E           TypeError: info() missing 1 required positional argument: &#x27;message&#x27;</span><br/><br/>page/dbmarket/app_details.py:56: TypeError<br/> -------------------------------Captured log setup------------------------------- <br/>[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session {&quot;capabilities&quot;: {&quot;firstMatch&quot;: [{&quot;platformName&quot;: &quot;Android&quot;, &quot;appium:platformVersion&quot;: &quot;11&quot;, &quot;appium:deviceName&quot;: &quot;Android&quot;, &quot;appium:appPackage&quot;: &quot;com.dangbeimarket&quot;, &quot;appium:appActivity&quot;: &quot;.activity.WelcomeActivity&quot;, &quot;appium:unicodeKeyboard&quot;: true, &quot;appium:resetKeyboard&quot;: true}]}, &quot;desiredCapabilities&quot;: {&quot;platformName&quot;: &quot;Android&quot;, &quot;platformVersion&quot;: &quot;11&quot;, &quot;deviceName&quot;: &quot;Android&quot;, &quot;appPackage&quot;: &quot;com.dangbeimarket&quot;, &quot;appActivity&quot;: &quot;.activity.WelcomeActivity&quot;, &quot;unicodeKeyboard&quot;: true, &quot;resetKeyboard&quot;: true}}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:227 Starting new HTTP connection (1): 192.168.18.61:4723
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session HTTP/1.1&quot; 200 939
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/a1abfa5f-eb6f-4661-9cd2-3a3fdd35488f/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.RelativeLayout[2]/android.widget.TextView[1]&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/a1abfa5f-eb6f-4661-9cd2-3a3fdd35488f/element HTTP/1.1&quot; 404 529
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/a1abfa5f-eb6f-4661-9cd2-3a3fdd35488f/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.RelativeLayout[2]/android.widget.TextView[1]&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/a1abfa5f-eb6f-4661-9cd2-3a3fdd35488f/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/a1abfa5f-eb6f-4661-9cd2-3a3fdd35488f/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.RelativeLayout[2]/android.widget.TextView[1]&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/a1abfa5f-eb6f-4661-9cd2-3a3fdd35488f/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/a1abfa5f-eb6f-4661-9cd2-3a3fdd35488f/element/3bf9e639-01a8-4cd9-af09-837cec998241/click {&quot;id&quot;: &quot;3bf9e639-01a8-4cd9-af09-837cec998241&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/a1abfa5f-eb6f-4661-9cd2-3a3fdd35488f/element/3bf9e639-01a8-4cd9-af09-837cec998241/click HTTP/1.1&quot; 200 14
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/a1abfa5f-eb6f-4661-9cd2-3a3fdd35488f/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.support.v4.view.ViewPager/android.widget.HorizontalScrollView/android.widget.RelativeLayout/android.widget.ImageView[9]&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/a1abfa5f-eb6f-4661-9cd2-3a3fdd35488f/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/a1abfa5f-eb6f-4661-9cd2-3a3fdd35488f/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.support.v4.view.ViewPager/android.widget.HorizontalScrollView/android.widget.RelativeLayout/android.widget.ImageView[9]&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/a1abfa5f-eb6f-4661-9cd2-3a3fdd35488f/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/a1abfa5f-eb6f-4661-9cd2-3a3fdd35488f/element/ccd778b4-5067-4e2b-aad1-e60b1e3829a0/click {&quot;id&quot;: &quot;ccd778b4-5067-4e2b-aad1-e60b1e3829a0&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/a1abfa5f-eb6f-4661-9cd2-3a3fdd35488f/element/ccd778b4-5067-4e2b-aad1-e60b1e3829a0/click HTTP/1.1&quot; 200 14
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request<br/> -------------------------------Captured log call-------------------------------- <br/>[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/a1abfa5f-eb6f-4661-9cd2-3a3fdd35488f/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.HorizontalScrollView/android.widget.RelativeLayout/android.widget.ImageView[2]&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/a1abfa5f-eb6f-4661-9cd2-3a3fdd35488f/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/a1abfa5f-eb6f-4661-9cd2-3a3fdd35488f/element/5a8f166f-17f1-445a-8af8-203a0a589b6f/click {&quot;id&quot;: &quot;5a8f166f-17f1-445a-8af8-203a0a589b6f&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/a1abfa5f-eb6f-4661-9cd2-3a3fdd35488f/element/5a8f166f-17f1-445a-8af8-203a0a589b6f/click HTTP/1.1&quot; 200 14
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/a1abfa5f-eb6f-4661-9cd2-3a3fdd35488f/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.support.v4.view.ViewPager/android.widget.ScrollView/android.widget.RelativeLayout/android.widget.RelativeLayout[1]/android.widget.RelativeLayout/android.widget.LinearLayout&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/a1abfa5f-eb6f-4661-9cd2-3a3fdd35488f/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/a1abfa5f-eb6f-4661-9cd2-3a3fdd35488f/element/ad6e1288-829b-48fe-bba0-17a0ce0bb537/click {&quot;id&quot;: &quot;ad6e1288-829b-48fe-bba0-17a0ce0bb537&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/a1abfa5f-eb6f-4661-9cd2-3a3fdd35488f/element/ad6e1288-829b-48fe-bba0-17a0ce0bb537/click HTTP/1.1&quot; 200 14
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/a1abfa5f-eb6f-4661-9cd2-3a3fdd35488f/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.support.v7.widget.RecyclerView/android.widget.RelativeLayout[1]/android.view.View[9]&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/a1abfa5f-eb6f-4661-9cd2-3a3fdd35488f/element HTTP/1.1&quot; 404 493
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/a1abfa5f-eb6f-4661-9cd2-3a3fdd35488f/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.support.v7.widget.RecyclerView/android.widget.RelativeLayout[1]/android.view.View[9]&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/a1abfa5f-eb6f-4661-9cd2-3a3fdd35488f/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">Testcase/testcase_Dbmarket.py::Test_dbmarket::test01</td>
+          <td class="col-duration">0.20</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session {&quot;capabilities&quot;: {&quot;firstMatch&quot;: [{&quot;platformName&quot;: &quot;Android&quot;, &quot;appium:platformVersion&quot;: &quot;11&quot;, &quot;appium:deviceName&quot;: &quot;Android&quot;, &quot;appium:appPackage&quot;: &quot;com.dangbeimarket&quot;, &quot;appium:appActivity&quot;: &quot;.activity.WelcomeActivity&quot;, &quot;appium:unicodeKeyboard&quot;: true, &quot;appium:resetKeyboard&quot;: true}]}, &quot;desiredCapabilities&quot;: {&quot;platformName&quot;: &quot;Android&quot;, &quot;platformVersion&quot;: &quot;11&quot;, &quot;deviceName&quot;: &quot;Android&quot;, &quot;appPackage&quot;: &quot;com.dangbeimarket&quot;, &quot;appActivity&quot;: &quot;.activity.WelcomeActivity&quot;, &quot;unicodeKeyboard&quot;: true, &quot;resetKeyboard&quot;: true}}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:227 Starting new HTTP connection (1): 192.168.18.61:4723
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session HTTP/1.1&quot; 200 939
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/26a659ec-b732-48a3-a749-8dd6d377f6d5/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.RelativeLayout[2]/android.widget.TextView[1]&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/26a659ec-b732-48a3-a749-8dd6d377f6d5/element HTTP/1.1&quot; 404 493
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/26a659ec-b732-48a3-a749-8dd6d377f6d5/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.RelativeLayout[2]/android.widget.TextView[1]&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/26a659ec-b732-48a3-a749-8dd6d377f6d5/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/26a659ec-b732-48a3-a749-8dd6d377f6d5/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.RelativeLayout[2]/android.widget.TextView[1]&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/26a659ec-b732-48a3-a749-8dd6d377f6d5/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/26a659ec-b732-48a3-a749-8dd6d377f6d5/element/f30cda0c-8340-4084-8c04-a9151b46d74a/click {&quot;id&quot;: &quot;f30cda0c-8340-4084-8c04-a9151b46d74a&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/26a659ec-b732-48a3-a749-8dd6d377f6d5/element/f30cda0c-8340-4084-8c04-a9151b46d74a/click HTTP/1.1&quot; 200 14
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/26a659ec-b732-48a3-a749-8dd6d377f6d5/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.support.v4.view.ViewPager/android.widget.HorizontalScrollView/android.widget.RelativeLayout/android.widget.ImageView[9]&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/26a659ec-b732-48a3-a749-8dd6d377f6d5/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/26a659ec-b732-48a3-a749-8dd6d377f6d5/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.support.v4.view.ViewPager/android.widget.HorizontalScrollView/android.widget.RelativeLayout/android.widget.ImageView[9]&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/26a659ec-b732-48a3-a749-8dd6d377f6d5/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/26a659ec-b732-48a3-a749-8dd6d377f6d5/element/6e84f100-3853-45a2-be75-58ce9cb74aa7/click {&quot;id&quot;: &quot;6e84f100-3853-45a2-be75-58ce9cb74aa7&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/26a659ec-b732-48a3-a749-8dd6d377f6d5/element/6e84f100-3853-45a2-be75-58ce9cb74aa7/click HTTP/1.1&quot; 200 14
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request<br/> -------------------------------Captured log call-------------------------------- <br/>[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/26a659ec-b732-48a3-a749-8dd6d377f6d5/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.HorizontalScrollView/android.widget.RelativeLayout/android.widget.ImageView[2]&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/26a659ec-b732-48a3-a749-8dd6d377f6d5/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[32mINFO    [0m root:loging.py:33 当贝市场app可以成功打开<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">Testcase/testcase_Dbmarket.py::Test_dbmarket::test02</td>
+          <td class="col-duration">2.49</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session {&quot;capabilities&quot;: {&quot;firstMatch&quot;: [{&quot;platformName&quot;: &quot;Android&quot;, &quot;appium:platformVersion&quot;: &quot;11&quot;, &quot;appium:deviceName&quot;: &quot;Android&quot;, &quot;appium:appPackage&quot;: &quot;com.dangbeimarket&quot;, &quot;appium:appActivity&quot;: &quot;.activity.WelcomeActivity&quot;, &quot;appium:unicodeKeyboard&quot;: true, &quot;appium:resetKeyboard&quot;: true}]}, &quot;desiredCapabilities&quot;: {&quot;platformName&quot;: &quot;Android&quot;, &quot;platformVersion&quot;: &quot;11&quot;, &quot;deviceName&quot;: &quot;Android&quot;, &quot;appPackage&quot;: &quot;com.dangbeimarket&quot;, &quot;appActivity&quot;: &quot;.activity.WelcomeActivity&quot;, &quot;unicodeKeyboard&quot;: true, &quot;resetKeyboard&quot;: true}}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:227 Starting new HTTP connection (1): 192.168.18.61:4723
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session HTTP/1.1&quot; 200 939
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/2ea01175-a2f8-43bf-92ba-224d9f332598/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.RelativeLayout[2]/android.widget.TextView[1]&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/2ea01175-a2f8-43bf-92ba-224d9f332598/element HTTP/1.1&quot; 404 529
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/2ea01175-a2f8-43bf-92ba-224d9f332598/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.RelativeLayout[2]/android.widget.TextView[1]&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/2ea01175-a2f8-43bf-92ba-224d9f332598/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/2ea01175-a2f8-43bf-92ba-224d9f332598/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.RelativeLayout[2]/android.widget.TextView[1]&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/2ea01175-a2f8-43bf-92ba-224d9f332598/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/2ea01175-a2f8-43bf-92ba-224d9f332598/element/823036d8-1507-490a-83a8-47c4265a3d8d/click {&quot;id&quot;: &quot;823036d8-1507-490a-83a8-47c4265a3d8d&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/2ea01175-a2f8-43bf-92ba-224d9f332598/element/823036d8-1507-490a-83a8-47c4265a3d8d/click HTTP/1.1&quot; 200 14
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/2ea01175-a2f8-43bf-92ba-224d9f332598/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.support.v4.view.ViewPager/android.widget.HorizontalScrollView/android.widget.RelativeLayout/android.widget.ImageView[9]&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/2ea01175-a2f8-43bf-92ba-224d9f332598/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/2ea01175-a2f8-43bf-92ba-224d9f332598/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.support.v4.view.ViewPager/android.widget.HorizontalScrollView/android.widget.RelativeLayout/android.widget.ImageView[9]&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/2ea01175-a2f8-43bf-92ba-224d9f332598/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/2ea01175-a2f8-43bf-92ba-224d9f332598/element/6f054227-8d03-446b-95c7-4a7ec1ed4f21/click {&quot;id&quot;: &quot;6f054227-8d03-446b-95c7-4a7ec1ed4f21&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/2ea01175-a2f8-43bf-92ba-224d9f332598/element/6f054227-8d03-446b-95c7-4a7ec1ed4f21/click HTTP/1.1&quot; 200 14
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request<br/> -------------------------------Captured log call-------------------------------- <br/>[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/2ea01175-a2f8-43bf-92ba-224d9f332598/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.HorizontalScrollView/android.widget.RelativeLayout/android.widget.ImageView[1]&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/2ea01175-a2f8-43bf-92ba-224d9f332598/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/2ea01175-a2f8-43bf-92ba-224d9f332598/element/766d0da9-d4f5-4eab-8bda-eb6d754f8267/click {&quot;id&quot;: &quot;766d0da9-d4f5-4eab-8bda-eb6d754f8267&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/2ea01175-a2f8-43bf-92ba-224d9f332598/element/766d0da9-d4f5-4eab-8bda-eb6d754f8267/click HTTP/1.1&quot; 200 14
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/2ea01175-a2f8-43bf-92ba-224d9f332598/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.support.v4.view.ViewPager/android.widget.ScrollView/android.widget.RelativeLayout/android.widget.RelativeLayout[1]/android.widget.ImageView&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/2ea01175-a2f8-43bf-92ba-224d9f332598/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/2ea01175-a2f8-43bf-92ba-224d9f332598/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.support.v4.view.ViewPager/android.widget.ScrollView/android.widget.RelativeLayout/android.widget.RelativeLayout[2]/android.widget.ImageView&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/2ea01175-a2f8-43bf-92ba-224d9f332598/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[32mINFO    [0m root:loging.py:33 我的tab页面热播影视模块和专题榜单模块展示正常<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">Testcase/testcase_Dbmarket.py::Test_dbmarket::test03</td>
+          <td class="col-duration">4.90</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session {&quot;capabilities&quot;: {&quot;firstMatch&quot;: [{&quot;platformName&quot;: &quot;Android&quot;, &quot;appium:platformVersion&quot;: &quot;11&quot;, &quot;appium:deviceName&quot;: &quot;Android&quot;, &quot;appium:appPackage&quot;: &quot;com.dangbeimarket&quot;, &quot;appium:appActivity&quot;: &quot;.activity.WelcomeActivity&quot;, &quot;appium:unicodeKeyboard&quot;: true, &quot;appium:resetKeyboard&quot;: true}]}, &quot;desiredCapabilities&quot;: {&quot;platformName&quot;: &quot;Android&quot;, &quot;platformVersion&quot;: &quot;11&quot;, &quot;deviceName&quot;: &quot;Android&quot;, &quot;appPackage&quot;: &quot;com.dangbeimarket&quot;, &quot;appActivity&quot;: &quot;.activity.WelcomeActivity&quot;, &quot;unicodeKeyboard&quot;: true, &quot;resetKeyboard&quot;: true}}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:227 Starting new HTTP connection (1): 192.168.18.61:4723
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session HTTP/1.1&quot; 200 939
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/000f0ba5-e618-48ca-ad6c-46827082837c/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.RelativeLayout[2]/android.widget.TextView[1]&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/000f0ba5-e618-48ca-ad6c-46827082837c/element HTTP/1.1&quot; 404 493
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/000f0ba5-e618-48ca-ad6c-46827082837c/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.RelativeLayout[2]/android.widget.TextView[1]&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/000f0ba5-e618-48ca-ad6c-46827082837c/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/000f0ba5-e618-48ca-ad6c-46827082837c/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.RelativeLayout[2]/android.widget.TextView[1]&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/000f0ba5-e618-48ca-ad6c-46827082837c/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/000f0ba5-e618-48ca-ad6c-46827082837c/element/d2d51e77-9165-4251-8639-34a8571357aa/click {&quot;id&quot;: &quot;d2d51e77-9165-4251-8639-34a8571357aa&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/000f0ba5-e618-48ca-ad6c-46827082837c/element/d2d51e77-9165-4251-8639-34a8571357aa/click HTTP/1.1&quot; 200 14
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/000f0ba5-e618-48ca-ad6c-46827082837c/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.support.v4.view.ViewPager/android.widget.HorizontalScrollView/android.widget.RelativeLayout/android.widget.ImageView[9]&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/000f0ba5-e618-48ca-ad6c-46827082837c/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/000f0ba5-e618-48ca-ad6c-46827082837c/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.support.v4.view.ViewPager/android.widget.HorizontalScrollView/android.widget.RelativeLayout/android.widget.ImageView[9]&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/000f0ba5-e618-48ca-ad6c-46827082837c/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/000f0ba5-e618-48ca-ad6c-46827082837c/element/9b5ed6c6-961e-4e8c-b342-817ac91cb12c/click {&quot;id&quot;: &quot;9b5ed6c6-961e-4e8c-b342-817ac91cb12c&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/000f0ba5-e618-48ca-ad6c-46827082837c/element/9b5ed6c6-961e-4e8c-b342-817ac91cb12c/click HTTP/1.1&quot; 200 14
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request<br/> -------------------------------Captured log call-------------------------------- <br/>[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/000f0ba5-e618-48ca-ad6c-46827082837c/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.HorizontalScrollView/android.widget.RelativeLayout/android.widget.ImageView[1]&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/000f0ba5-e618-48ca-ad6c-46827082837c/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/000f0ba5-e618-48ca-ad6c-46827082837c/element/9b37736f-97f1-43cb-8763-0fbbe847ff4c/click {&quot;id&quot;: &quot;9b37736f-97f1-43cb-8763-0fbbe847ff4c&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/000f0ba5-e618-48ca-ad6c-46827082837c/element/9b37736f-97f1-43cb-8763-0fbbe847ff4c/click HTTP/1.1&quot; 200 14
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/000f0ba5-e618-48ca-ad6c-46827082837c/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.support.v4.view.ViewPager/android.widget.ScrollView/android.widget.RelativeLayout/android.widget.RelativeLayout[1]/android.widget.ImageView&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/000f0ba5-e618-48ca-ad6c-46827082837c/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/000f0ba5-e618-48ca-ad6c-46827082837c/element/00b8a351-e0b0-408e-8e9e-690c2f971a91/click {&quot;id&quot;: &quot;00b8a351-e0b0-408e-8e9e-690c2f971a91&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/000f0ba5-e618-48ca-ad6c-46827082837c/element/00b8a351-e0b0-408e-8e9e-690c2f971a91/click HTTP/1.1&quot; 200 14
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/000f0ba5-e618-48ca-ad6c-46827082837c/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.HorizontalScrollView/android.widget.RelativeLayout/android.widget.TextView[1]&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/000f0ba5-e618-48ca-ad6c-46827082837c/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/000f0ba5-e618-48ca-ad6c-46827082837c/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.HorizontalScrollView/android.widget.RelativeLayout/android.widget.TextView[2]&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/000f0ba5-e618-48ca-ad6c-46827082837c/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[32mINFO    [0m root:loging.py:33 热播影视资源模块，点击后可以跳转对应页面<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">Testcase/testcase_Dbmarket.py::Test_dbmarket::test04</td>
+          <td class="col-duration">2.43</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session {&quot;capabilities&quot;: {&quot;firstMatch&quot;: [{&quot;platformName&quot;: &quot;Android&quot;, &quot;appium:platformVersion&quot;: &quot;11&quot;, &quot;appium:deviceName&quot;: &quot;Android&quot;, &quot;appium:appPackage&quot;: &quot;com.dangbeimarket&quot;, &quot;appium:appActivity&quot;: &quot;.activity.WelcomeActivity&quot;, &quot;appium:unicodeKeyboard&quot;: true, &quot;appium:resetKeyboard&quot;: true}]}, &quot;desiredCapabilities&quot;: {&quot;platformName&quot;: &quot;Android&quot;, &quot;platformVersion&quot;: &quot;11&quot;, &quot;deviceName&quot;: &quot;Android&quot;, &quot;appPackage&quot;: &quot;com.dangbeimarket&quot;, &quot;appActivity&quot;: &quot;.activity.WelcomeActivity&quot;, &quot;unicodeKeyboard&quot;: true, &quot;resetKeyboard&quot;: true}}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:227 Starting new HTTP connection (1): 192.168.18.61:4723
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session HTTP/1.1&quot; 200 939
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/7d85c15d-ca92-45ad-865d-960a65266032/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.RelativeLayout[2]/android.widget.TextView[1]&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/7d85c15d-ca92-45ad-865d-960a65266032/element HTTP/1.1&quot; 404 529
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/7d85c15d-ca92-45ad-865d-960a65266032/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.RelativeLayout[2]/android.widget.TextView[1]&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/7d85c15d-ca92-45ad-865d-960a65266032/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/7d85c15d-ca92-45ad-865d-960a65266032/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.RelativeLayout[2]/android.widget.TextView[1]&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/7d85c15d-ca92-45ad-865d-960a65266032/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/7d85c15d-ca92-45ad-865d-960a65266032/element/2b4d43ec-52ba-4f36-8305-45127a6560bf/click {&quot;id&quot;: &quot;2b4d43ec-52ba-4f36-8305-45127a6560bf&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/7d85c15d-ca92-45ad-865d-960a65266032/element/2b4d43ec-52ba-4f36-8305-45127a6560bf/click HTTP/1.1&quot; 200 14
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/7d85c15d-ca92-45ad-865d-960a65266032/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.support.v4.view.ViewPager/android.widget.HorizontalScrollView/android.widget.RelativeLayout/android.widget.ImageView[9]&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/7d85c15d-ca92-45ad-865d-960a65266032/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/7d85c15d-ca92-45ad-865d-960a65266032/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.support.v4.view.ViewPager/android.widget.HorizontalScrollView/android.widget.RelativeLayout/android.widget.ImageView[9]&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/7d85c15d-ca92-45ad-865d-960a65266032/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/7d85c15d-ca92-45ad-865d-960a65266032/element/83064004-1c65-44fa-9647-5a1d6dc5fd3c/click {&quot;id&quot;: &quot;83064004-1c65-44fa-9647-5a1d6dc5fd3c&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/7d85c15d-ca92-45ad-865d-960a65266032/element/83064004-1c65-44fa-9647-5a1d6dc5fd3c/click HTTP/1.1&quot; 200 14
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request<br/> -------------------------------Captured log call-------------------------------- <br/>[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/7d85c15d-ca92-45ad-865d-960a65266032/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.HorizontalScrollView/android.widget.RelativeLayout/android.widget.ImageView[1]&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/7d85c15d-ca92-45ad-865d-960a65266032/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/7d85c15d-ca92-45ad-865d-960a65266032/element/34794508-1e8d-4325-b054-ebce5d80ba16/click {&quot;id&quot;: &quot;34794508-1e8d-4325-b054-ebce5d80ba16&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/7d85c15d-ca92-45ad-865d-960a65266032/element/34794508-1e8d-4325-b054-ebce5d80ba16/click HTTP/1.1&quot; 200 14
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/7d85c15d-ca92-45ad-865d-960a65266032/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.support.v4.view.ViewPager/android.widget.ScrollView/android.widget.RelativeLayout/android.widget.RelativeLayout[2]/android.widget.ImageView&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/7d85c15d-ca92-45ad-865d-960a65266032/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/7d85c15d-ca92-45ad-865d-960a65266032/element/cbb21574-15ae-417e-96d8-4a05c590e130/click {&quot;id&quot;: &quot;cbb21574-15ae-417e-96d8-4a05c590e130&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/7d85c15d-ca92-45ad-865d-960a65266032/element/cbb21574-15ae-417e-96d8-4a05c590e130/click HTTP/1.1&quot; 200 14
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/7d85c15d-ca92-45ad-865d-960a65266032/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.TextView&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/7d85c15d-ca92-45ad-865d-960a65266032/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[32mINFO    [0m root:loging.py:33 点击专题榜单源模块，可以跳转对应页面<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">Testcase/testcase_Dbmarket.py::Test_dbmarket::test06</td>
+          <td class="col-duration">7.89</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session {&quot;capabilities&quot;: {&quot;firstMatch&quot;: [{&quot;platformName&quot;: &quot;Android&quot;, &quot;appium:platformVersion&quot;: &quot;11&quot;, &quot;appium:deviceName&quot;: &quot;Android&quot;, &quot;appium:appPackage&quot;: &quot;com.dangbeimarket&quot;, &quot;appium:appActivity&quot;: &quot;.activity.WelcomeActivity&quot;, &quot;appium:unicodeKeyboard&quot;: true, &quot;appium:resetKeyboard&quot;: true}]}, &quot;desiredCapabilities&quot;: {&quot;platformName&quot;: &quot;Android&quot;, &quot;platformVersion&quot;: &quot;11&quot;, &quot;deviceName&quot;: &quot;Android&quot;, &quot;appPackage&quot;: &quot;com.dangbeimarket&quot;, &quot;appActivity&quot;: &quot;.activity.WelcomeActivity&quot;, &quot;unicodeKeyboard&quot;: true, &quot;resetKeyboard&quot;: true}}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:227 Starting new HTTP connection (1): 192.168.18.61:4723
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session HTTP/1.1&quot; 200 939
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/14f8cd53-d027-4415-a9ae-af5b876e2000/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.RelativeLayout[2]/android.widget.TextView[1]&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/14f8cd53-d027-4415-a9ae-af5b876e2000/element HTTP/1.1&quot; 404 529
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/14f8cd53-d027-4415-a9ae-af5b876e2000/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.RelativeLayout[2]/android.widget.TextView[1]&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/14f8cd53-d027-4415-a9ae-af5b876e2000/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/14f8cd53-d027-4415-a9ae-af5b876e2000/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.RelativeLayout[2]/android.widget.TextView[1]&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/14f8cd53-d027-4415-a9ae-af5b876e2000/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/14f8cd53-d027-4415-a9ae-af5b876e2000/element/cc88bcec-1ce7-4be2-9d86-f0a7bb5868d2/click {&quot;id&quot;: &quot;cc88bcec-1ce7-4be2-9d86-f0a7bb5868d2&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/14f8cd53-d027-4415-a9ae-af5b876e2000/element/cc88bcec-1ce7-4be2-9d86-f0a7bb5868d2/click HTTP/1.1&quot; 200 14
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/14f8cd53-d027-4415-a9ae-af5b876e2000/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.support.v4.view.ViewPager/android.widget.HorizontalScrollView/android.widget.RelativeLayout/android.widget.ImageView[9]&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/14f8cd53-d027-4415-a9ae-af5b876e2000/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/14f8cd53-d027-4415-a9ae-af5b876e2000/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.support.v4.view.ViewPager/android.widget.HorizontalScrollView/android.widget.RelativeLayout/android.widget.ImageView[9]&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/14f8cd53-d027-4415-a9ae-af5b876e2000/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/14f8cd53-d027-4415-a9ae-af5b876e2000/element/aae38668-66df-489e-838d-be7e02d8a440/click {&quot;id&quot;: &quot;aae38668-66df-489e-838d-be7e02d8a440&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/14f8cd53-d027-4415-a9ae-af5b876e2000/element/aae38668-66df-489e-838d-be7e02d8a440/click HTTP/1.1&quot; 200 14
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request<br/> -------------------------------Captured log call-------------------------------- <br/>[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/14f8cd53-d027-4415-a9ae-af5b876e2000/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.HorizontalScrollView/android.widget.RelativeLayout/android.widget.ImageView[1]&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/14f8cd53-d027-4415-a9ae-af5b876e2000/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/14f8cd53-d027-4415-a9ae-af5b876e2000/element/e0ea0508-e2e8-4a75-9d48-b315ef35d1a2/click {&quot;id&quot;: &quot;e0ea0508-e2e8-4a75-9d48-b315ef35d1a2&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/14f8cd53-d027-4415-a9ae-af5b876e2000/element/e0ea0508-e2e8-4a75-9d48-b315ef35d1a2/click HTTP/1.1&quot; 200 14
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/14f8cd53-d027-4415-a9ae-af5b876e2000/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.support.v4.view.ViewPager/android.widget.ScrollView/android.widget.RelativeLayout/android.widget.RelativeLayout[1]/android.widget.ImageView&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/14f8cd53-d027-4415-a9ae-af5b876e2000/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/14f8cd53-d027-4415-a9ae-af5b876e2000/element/3fe4df17-8a6f-41b9-90f6-e060d792c621/click {&quot;id&quot;: &quot;3fe4df17-8a6f-41b9-90f6-e060d792c621&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/14f8cd53-d027-4415-a9ae-af5b876e2000/element/3fe4df17-8a6f-41b9-90f6-e060d792c621/click HTTP/1.1&quot; 200 14
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/14f8cd53-d027-4415-a9ae-af5b876e2000/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.HorizontalScrollView/android.widget.RelativeLayout/android.widget.RelativeLayout[16]/android.widget.TextView&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/14f8cd53-d027-4415-a9ae-af5b876e2000/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/14f8cd53-d027-4415-a9ae-af5b876e2000/element/4d18aa96-3287-4d96-baa5-64470e1914b1/click {&quot;id&quot;: &quot;4d18aa96-3287-4d96-baa5-64470e1914b1&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/14f8cd53-d027-4415-a9ae-af5b876e2000/element/4d18aa96-3287-4d96-baa5-64470e1914b1/click HTTP/1.1&quot; 200 14
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/14f8cd53-d027-4415-a9ae-af5b876e2000/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.RelativeLayout/android.widget.TextView&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/14f8cd53-d027-4415-a9ae-af5b876e2000/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/14f8cd53-d027-4415-a9ae-af5b876e2000/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.HorizontalScrollView/android.widget.RelativeLayout/android.widget.RelativeLayout[17]/android.widget.TextView&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/14f8cd53-d027-4415-a9ae-af5b876e2000/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/14f8cd53-d027-4415-a9ae-af5b876e2000/element/d5508d81-c86b-4685-b4a1-8e0536eaaba3/click {&quot;id&quot;: &quot;d5508d81-c86b-4685-b4a1-8e0536eaaba3&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/14f8cd53-d027-4415-a9ae-af5b876e2000/element/d5508d81-c86b-4685-b4a1-8e0536eaaba3/click HTTP/1.1&quot; 200 14
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/14f8cd53-d027-4415-a9ae-af5b876e2000/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.RelativeLayout/android.widget.TextView&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/14f8cd53-d027-4415-a9ae-af5b876e2000/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[32mINFO    [0m root:loging.py:33 点击资源播放跳转正确<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">Testcase/testcase_Dbmarket.py::Test_dbmarket::test07</td>
+          <td class="col-duration">11.82</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session {&quot;capabilities&quot;: {&quot;firstMatch&quot;: [{&quot;platformName&quot;: &quot;Android&quot;, &quot;appium:platformVersion&quot;: &quot;11&quot;, &quot;appium:deviceName&quot;: &quot;Android&quot;, &quot;appium:appPackage&quot;: &quot;com.dangbeimarket&quot;, &quot;appium:appActivity&quot;: &quot;.activity.WelcomeActivity&quot;, &quot;appium:unicodeKeyboard&quot;: true, &quot;appium:resetKeyboard&quot;: true}]}, &quot;desiredCapabilities&quot;: {&quot;platformName&quot;: &quot;Android&quot;, &quot;platformVersion&quot;: &quot;11&quot;, &quot;deviceName&quot;: &quot;Android&quot;, &quot;appPackage&quot;: &quot;com.dangbeimarket&quot;, &quot;appActivity&quot;: &quot;.activity.WelcomeActivity&quot;, &quot;unicodeKeyboard&quot;: true, &quot;resetKeyboard&quot;: true}}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:227 Starting new HTTP connection (1): 192.168.18.61:4723
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session HTTP/1.1&quot; 200 939
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/5c91a0be-8a06-4f9c-a5e0-a3fcbb182734/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.RelativeLayout[2]/android.widget.TextView[1]&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/5c91a0be-8a06-4f9c-a5e0-a3fcbb182734/element HTTP/1.1&quot; 404 529
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/5c91a0be-8a06-4f9c-a5e0-a3fcbb182734/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.RelativeLayout[2]/android.widget.TextView[1]&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/5c91a0be-8a06-4f9c-a5e0-a3fcbb182734/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/5c91a0be-8a06-4f9c-a5e0-a3fcbb182734/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.RelativeLayout[2]/android.widget.TextView[1]&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/5c91a0be-8a06-4f9c-a5e0-a3fcbb182734/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/5c91a0be-8a06-4f9c-a5e0-a3fcbb182734/element/3601d231-ea2d-4976-bb7b-8f96d32e3d86/click {&quot;id&quot;: &quot;3601d231-ea2d-4976-bb7b-8f96d32e3d86&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/5c91a0be-8a06-4f9c-a5e0-a3fcbb182734/element/3601d231-ea2d-4976-bb7b-8f96d32e3d86/click HTTP/1.1&quot; 200 14
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/5c91a0be-8a06-4f9c-a5e0-a3fcbb182734/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.support.v4.view.ViewPager/android.widget.HorizontalScrollView/android.widget.RelativeLayout/android.widget.ImageView[9]&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/5c91a0be-8a06-4f9c-a5e0-a3fcbb182734/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/5c91a0be-8a06-4f9c-a5e0-a3fcbb182734/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.support.v4.view.ViewPager/android.widget.HorizontalScrollView/android.widget.RelativeLayout/android.widget.ImageView[9]&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/5c91a0be-8a06-4f9c-a5e0-a3fcbb182734/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/5c91a0be-8a06-4f9c-a5e0-a3fcbb182734/element/4c0df6ad-f952-4e7e-a7b5-f1a4c75ee133/click {&quot;id&quot;: &quot;4c0df6ad-f952-4e7e-a7b5-f1a4c75ee133&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/5c91a0be-8a06-4f9c-a5e0-a3fcbb182734/element/4c0df6ad-f952-4e7e-a7b5-f1a4c75ee133/click HTTP/1.1&quot; 200 14
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request<br/> -------------------------------Captured log call-------------------------------- <br/>[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/5c91a0be-8a06-4f9c-a5e0-a3fcbb182734/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.HorizontalScrollView/android.widget.RelativeLayout/android.widget.ImageView[1]&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/5c91a0be-8a06-4f9c-a5e0-a3fcbb182734/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/5c91a0be-8a06-4f9c-a5e0-a3fcbb182734/element/020e31d2-71ab-4f59-b87b-0ac5d0ed88e8/click {&quot;id&quot;: &quot;020e31d2-71ab-4f59-b87b-0ac5d0ed88e8&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/5c91a0be-8a06-4f9c-a5e0-a3fcbb182734/element/020e31d2-71ab-4f59-b87b-0ac5d0ed88e8/click HTTP/1.1&quot; 200 14
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/5c91a0be-8a06-4f9c-a5e0-a3fcbb182734/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.support.v4.view.ViewPager/android.widget.ScrollView/android.widget.RelativeLayout/android.widget.RelativeLayout[1]/android.widget.ImageView&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/5c91a0be-8a06-4f9c-a5e0-a3fcbb182734/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/5c91a0be-8a06-4f9c-a5e0-a3fcbb182734/element/87cafc2b-daaf-4e43-9e15-df583b377e9b/click {&quot;id&quot;: &quot;87cafc2b-daaf-4e43-9e15-df583b377e9b&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/5c91a0be-8a06-4f9c-a5e0-a3fcbb182734/element/87cafc2b-daaf-4e43-9e15-df583b377e9b/click HTTP/1.1&quot; 200 14
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/5c91a0be-8a06-4f9c-a5e0-a3fcbb182734/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.HorizontalScrollView/android.widget.RelativeLayout/android.widget.TextView[1]&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/5c91a0be-8a06-4f9c-a5e0-a3fcbb182734/element HTTP/1.1&quot; 404 529
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/5c91a0be-8a06-4f9c-a5e0-a3fcbb182734/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.HorizontalScrollView/android.widget.RelativeLayout/android.widget.TextView[1]&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/5c91a0be-8a06-4f9c-a5e0-a3fcbb182734/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/5c91a0be-8a06-4f9c-a5e0-a3fcbb182734/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.HorizontalScrollView/android.widget.RelativeLayout/android.widget.TextView[2]&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/5c91a0be-8a06-4f9c-a5e0-a3fcbb182734/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/5c91a0be-8a06-4f9c-a5e0-a3fcbb182734/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.HorizontalScrollView/android.widget.RelativeLayout/android.widget.TextView[3]&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/5c91a0be-8a06-4f9c-a5e0-a3fcbb182734/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/5c91a0be-8a06-4f9c-a5e0-a3fcbb182734/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.HorizontalScrollView/android.widget.RelativeLayout/android.widget.TextView[4]&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/5c91a0be-8a06-4f9c-a5e0-a3fcbb182734/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[32mINFO    [0m root:loging.py:33 热播影视模块资源页面：本周电影热播、本周电视剧热播模块展示正确<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">Testcase/testcase_Dbmarket.py::Test_dbmarket::test10</td>
+          <td class="col-duration">5.54</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session {&quot;capabilities&quot;: {&quot;firstMatch&quot;: [{&quot;platformName&quot;: &quot;Android&quot;, &quot;appium:platformVersion&quot;: &quot;11&quot;, &quot;appium:deviceName&quot;: &quot;Android&quot;, &quot;appium:appPackage&quot;: &quot;com.dangbeimarket&quot;, &quot;appium:appActivity&quot;: &quot;.activity.WelcomeActivity&quot;, &quot;appium:unicodeKeyboard&quot;: true, &quot;appium:resetKeyboard&quot;: true}]}, &quot;desiredCapabilities&quot;: {&quot;platformName&quot;: &quot;Android&quot;, &quot;platformVersion&quot;: &quot;11&quot;, &quot;deviceName&quot;: &quot;Android&quot;, &quot;appPackage&quot;: &quot;com.dangbeimarket&quot;, &quot;appActivity&quot;: &quot;.activity.WelcomeActivity&quot;, &quot;unicodeKeyboard&quot;: true, &quot;resetKeyboard&quot;: true}}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:227 Starting new HTTP connection (1): 192.168.18.61:4723
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session HTTP/1.1&quot; 200 939
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/2eca61c6-da27-4f1f-86cf-752d36db8449/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.RelativeLayout[2]/android.widget.TextView[1]&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/2eca61c6-da27-4f1f-86cf-752d36db8449/element HTTP/1.1&quot; 404 493
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/2eca61c6-da27-4f1f-86cf-752d36db8449/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.RelativeLayout[2]/android.widget.TextView[1]&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/2eca61c6-da27-4f1f-86cf-752d36db8449/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/2eca61c6-da27-4f1f-86cf-752d36db8449/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.RelativeLayout[2]/android.widget.TextView[1]&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/2eca61c6-da27-4f1f-86cf-752d36db8449/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/2eca61c6-da27-4f1f-86cf-752d36db8449/element/d0cffc46-ec7e-4aa1-aeac-603508aa61bd/click {&quot;id&quot;: &quot;d0cffc46-ec7e-4aa1-aeac-603508aa61bd&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/2eca61c6-da27-4f1f-86cf-752d36db8449/element/d0cffc46-ec7e-4aa1-aeac-603508aa61bd/click HTTP/1.1&quot; 200 14
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/2eca61c6-da27-4f1f-86cf-752d36db8449/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.support.v4.view.ViewPager/android.widget.HorizontalScrollView/android.widget.RelativeLayout/android.widget.ImageView[9]&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/2eca61c6-da27-4f1f-86cf-752d36db8449/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/2eca61c6-da27-4f1f-86cf-752d36db8449/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.support.v4.view.ViewPager/android.widget.HorizontalScrollView/android.widget.RelativeLayout/android.widget.ImageView[9]&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/2eca61c6-da27-4f1f-86cf-752d36db8449/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/2eca61c6-da27-4f1f-86cf-752d36db8449/element/02562463-7a47-41fe-b1e9-be17a49aa212/click {&quot;id&quot;: &quot;02562463-7a47-41fe-b1e9-be17a49aa212&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/2eca61c6-da27-4f1f-86cf-752d36db8449/element/02562463-7a47-41fe-b1e9-be17a49aa212/click HTTP/1.1&quot; 200 14
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request<br/> -------------------------------Captured log call-------------------------------- <br/>[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/2eca61c6-da27-4f1f-86cf-752d36db8449/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.HorizontalScrollView/android.widget.RelativeLayout/android.widget.ImageView[2]&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/2eca61c6-da27-4f1f-86cf-752d36db8449/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/2eca61c6-da27-4f1f-86cf-752d36db8449/element/cf8d8f91-58e9-43bc-b09b-b8f6a0aa8d28/click {&quot;id&quot;: &quot;cf8d8f91-58e9-43bc-b09b-b8f6a0aa8d28&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/2eca61c6-da27-4f1f-86cf-752d36db8449/element/cf8d8f91-58e9-43bc-b09b-b8f6a0aa8d28/click HTTP/1.1&quot; 200 14
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/2eca61c6-da27-4f1f-86cf-752d36db8449/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.support.v4.view.ViewPager/android.widget.ScrollView/android.widget.RelativeLayout/android.widget.ImageView[7]&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/2eca61c6-da27-4f1f-86cf-752d36db8449/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/2eca61c6-da27-4f1f-86cf-752d36db8449/element/9d122339-d376-45f4-b5b3-98144edb9fcc/click {&quot;id&quot;: &quot;9d122339-d376-45f4-b5b3-98144edb9fcc&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/2eca61c6-da27-4f1f-86cf-752d36db8449/element/9d122339-d376-45f4-b5b3-98144edb9fcc/click HTTP/1.1&quot; 200 14
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/2eca61c6-da27-4f1f-86cf-752d36db8449/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.RelativeLayout[2]/android.widget.TextView[1]&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/2eca61c6-da27-4f1f-86cf-752d36db8449/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[32mINFO    [0m root:loging.py:33 搜索页面热门应用列表title存在，跳转页面正确<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">Testcase/testcase_akeydiagnostic.py::Test_akeydiagnostic::test01</td>
+          <td class="col-duration">0.82</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session {&quot;capabilities&quot;: {&quot;firstMatch&quot;: [{&quot;platformName&quot;: &quot;Android&quot;, &quot;appium:platformVersion&quot;: &quot;11&quot;, &quot;appium:deviceName&quot;: &quot;Android&quot;, &quot;appium:appPackage&quot;: &quot;com.dangbei.lerad.leradwatcher&quot;, &quot;appium:appActivity&quot;: &quot;.ui.main.MainActivity&quot;, &quot;appium:unicodeKeyboard&quot;: true, &quot;appium:resetKeyboard&quot;: true}]}, &quot;desiredCapabilities&quot;: {&quot;platformName&quot;: &quot;Android&quot;, &quot;platformVersion&quot;: &quot;11&quot;, &quot;deviceName&quot;: &quot;Android&quot;, &quot;appPackage&quot;: &quot;com.dangbei.lerad.leradwatcher&quot;, &quot;appActivity&quot;: &quot;.ui.main.MainActivity&quot;, &quot;unicodeKeyboard&quot;: true, &quot;resetKeyboard&quot;: true}}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:227 Starting new HTTP connection (1): 192.168.18.61:4723
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session HTTP/1.1&quot; 200 957
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request<br/> -------------------------------Captured log call-------------------------------- <br/>[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/5d51c209-4106-45d5-a831-4a825f081b20/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout[2]/android.widget.FrameLayout[1]/android.widget.TextView&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/5d51c209-4106-45d5-a831-4a825f081b20/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/5d51c209-4106-45d5-a831-4a825f081b20/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout[1]/android.widget.ImageView&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/5d51c209-4106-45d5-a831-4a825f081b20/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[32mINFO    [0m root:loging.py:33 进入一键诊断页面正确<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">Testcase/testcase_akeydiagnostic.py::Test_akeydiagnostic::test02</td>
+          <td class="col-duration">8.63</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session {&quot;capabilities&quot;: {&quot;firstMatch&quot;: [{&quot;platformName&quot;: &quot;Android&quot;, &quot;appium:platformVersion&quot;: &quot;11&quot;, &quot;appium:deviceName&quot;: &quot;Android&quot;, &quot;appium:appPackage&quot;: &quot;com.dangbei.lerad.leradwatcher&quot;, &quot;appium:appActivity&quot;: &quot;.ui.main.MainActivity&quot;, &quot;appium:unicodeKeyboard&quot;: true, &quot;appium:resetKeyboard&quot;: true}]}, &quot;desiredCapabilities&quot;: {&quot;platformName&quot;: &quot;Android&quot;, &quot;platformVersion&quot;: &quot;11&quot;, &quot;deviceName&quot;: &quot;Android&quot;, &quot;appPackage&quot;: &quot;com.dangbei.lerad.leradwatcher&quot;, &quot;appActivity&quot;: &quot;.ui.main.MainActivity&quot;, &quot;unicodeKeyboard&quot;: true, &quot;resetKeyboard&quot;: true}}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:227 Starting new HTTP connection (1): 192.168.18.61:4723
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session HTTP/1.1&quot; 200 957
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request<br/> -------------------------------Captured log call-------------------------------- <br/>[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/8e591706-d1f3-4830-965b-1c70707f6a55/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout[2]/android.widget.FrameLayout[1]/android.widget.TextView&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/8e591706-d1f3-4830-965b-1c70707f6a55/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/8e591706-d1f3-4830-965b-1c70707f6a55/element/1da7ad5d-cae3-4c77-981d-6e7e8b33ce9f/click {&quot;id&quot;: &quot;1da7ad5d-cae3-4c77-981d-6e7e8b33ce9f&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/8e591706-d1f3-4830-965b-1c70707f6a55/element/1da7ad5d-cae3-4c77-981d-6e7e8b33ce9f/click HTTP/1.1&quot; 200 14
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/8e591706-d1f3-4830-965b-1c70707f6a55/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[5]/android.widget.TextView&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/8e591706-d1f3-4830-965b-1c70707f6a55/element HTTP/1.1&quot; 404 493
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/8e591706-d1f3-4830-965b-1c70707f6a55/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[5]/android.widget.TextView&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/8e591706-d1f3-4830-965b-1c70707f6a55/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[32mINFO    [0m root:loging.py:33 可以正常诊断设备网络<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">Testcase/testcase_akeydiagnostic.py::Test_akeydiagnostic::test03</td>
+          <td class="col-duration">2.06</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session {&quot;capabilities&quot;: {&quot;firstMatch&quot;: [{&quot;platformName&quot;: &quot;Android&quot;, &quot;appium:platformVersion&quot;: &quot;11&quot;, &quot;appium:deviceName&quot;: &quot;Android&quot;, &quot;appium:appPackage&quot;: &quot;com.dangbei.lerad.leradwatcher&quot;, &quot;appium:appActivity&quot;: &quot;.ui.main.MainActivity&quot;, &quot;appium:unicodeKeyboard&quot;: true, &quot;appium:resetKeyboard&quot;: true}]}, &quot;desiredCapabilities&quot;: {&quot;platformName&quot;: &quot;Android&quot;, &quot;platformVersion&quot;: &quot;11&quot;, &quot;deviceName&quot;: &quot;Android&quot;, &quot;appPackage&quot;: &quot;com.dangbei.lerad.leradwatcher&quot;, &quot;appActivity&quot;: &quot;.ui.main.MainActivity&quot;, &quot;unicodeKeyboard&quot;: true, &quot;resetKeyboard&quot;: true}}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:227 Starting new HTTP connection (1): 192.168.18.61:4723
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session HTTP/1.1&quot; 200 957
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request<br/> -------------------------------Captured log call-------------------------------- <br/>[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/3b7bb582-c41f-432c-9abe-fc24db8cd9b0/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout[2]/android.widget.FrameLayout[2]/android.widget.TextView&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/3b7bb582-c41f-432c-9abe-fc24db8cd9b0/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/3b7bb582-c41f-432c-9abe-fc24db8cd9b0/element/3f439484-ae1c-4721-b80b-c0c41bcf1b86/click {&quot;id&quot;: &quot;3f439484-ae1c-4721-b80b-c0c41bcf1b86&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/3b7bb582-c41f-432c-9abe-fc24db8cd9b0/element/3f439484-ae1c-4721-b80b-c0c41bcf1b86/click HTTP/1.1&quot; 200 14
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/3b7bb582-c41f-432c-9abe-fc24db8cd9b0/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.TextView&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/3b7bb582-c41f-432c-9abe-fc24db8cd9b0/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[32mINFO    [0m root:loging.py:33 检查：日志收集 页面titl 展示正确
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/3b7bb582-c41f-432c-9abe-fc24db8cd9b0/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.TextView[1]&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/3b7bb582-c41f-432c-9abe-fc24db8cd9b0/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[32mINFO    [0m root:loging.py:33 检查：点按【日志收集】请确保收集时间不少于30，提示展示正确
+[32mINFO    [0m root:loging.py:33 日志收集页面元素检查完毕，全部展示正确<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">Testcase/testcase_akeydiagnostic.py::Test_akeydiagnostic::test04</td>
+          <td class="col-duration">9.69</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session {&quot;capabilities&quot;: {&quot;firstMatch&quot;: [{&quot;platformName&quot;: &quot;Android&quot;, &quot;appium:platformVersion&quot;: &quot;11&quot;, &quot;appium:deviceName&quot;: &quot;Android&quot;, &quot;appium:appPackage&quot;: &quot;com.dangbei.lerad.leradwatcher&quot;, &quot;appium:appActivity&quot;: &quot;.ui.main.MainActivity&quot;, &quot;appium:unicodeKeyboard&quot;: true, &quot;appium:resetKeyboard&quot;: true}]}, &quot;desiredCapabilities&quot;: {&quot;platformName&quot;: &quot;Android&quot;, &quot;platformVersion&quot;: &quot;11&quot;, &quot;deviceName&quot;: &quot;Android&quot;, &quot;appPackage&quot;: &quot;com.dangbei.lerad.leradwatcher&quot;, &quot;appActivity&quot;: &quot;.ui.main.MainActivity&quot;, &quot;unicodeKeyboard&quot;: true, &quot;resetKeyboard&quot;: true}}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:227 Starting new HTTP connection (1): 192.168.18.61:4723
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session HTTP/1.1&quot; 200 957
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request<br/> -------------------------------Captured log call-------------------------------- <br/>[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/9889b482-e985-42b8-9caf-74ffd6b29dfd/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout[2]/android.widget.FrameLayout[1]/android.widget.TextView&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/9889b482-e985-42b8-9caf-74ffd6b29dfd/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/9889b482-e985-42b8-9caf-74ffd6b29dfd/element/a6cbc946-9107-44af-ac4a-c7ceb01eec7c/click {&quot;id&quot;: &quot;a6cbc946-9107-44af-ac4a-c7ceb01eec7c&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/9889b482-e985-42b8-9caf-74ffd6b29dfd/element/a6cbc946-9107-44af-ac4a-c7ceb01eec7c/click HTTP/1.1&quot; 200 14
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/9889b482-e985-42b8-9caf-74ffd6b29dfd/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[1]/android.widget.TextView[1]&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/9889b482-e985-42b8-9caf-74ffd6b29dfd/element HTTP/1.1&quot; 404 529
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/9889b482-e985-42b8-9caf-74ffd6b29dfd/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[1]/android.widget.TextView[1]&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/9889b482-e985-42b8-9caf-74ffd6b29dfd/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[32mINFO    [0m root:loging.py:33 网络基础配置检查完毕
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/9889b482-e985-42b8-9caf-74ffd6b29dfd/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[2]/android.widget.TextView[1]&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/9889b482-e985-42b8-9caf-74ffd6b29dfd/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[32mINFO    [0m root:loging.py:33 IP地址配置检查完毕
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/9889b482-e985-42b8-9caf-74ffd6b29dfd/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[3]/android.widget.TextView[1]&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/9889b482-e985-42b8-9caf-74ffd6b29dfd/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[32mINFO    [0m root:loging.py:33 设备能否上网检查完毕
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/9889b482-e985-42b8-9caf-74ffd6b29dfd/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[4]/android.widget.TextView[1]&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/9889b482-e985-42b8-9caf-74ffd6b29dfd/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[32mINFO    [0m root:loging.py:33 网页连接测试检查完毕
+[32mINFO    [0m root:loging.py:33 网络服务4项检查均正确<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">Testcase/testcase_akeydiagnostic.py::Test_akeydiagnostic::test05</td>
+          <td class="col-duration">2.39</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session {&quot;capabilities&quot;: {&quot;firstMatch&quot;: [{&quot;platformName&quot;: &quot;Android&quot;, &quot;appium:platformVersion&quot;: &quot;11&quot;, &quot;appium:deviceName&quot;: &quot;Android&quot;, &quot;appium:appPackage&quot;: &quot;com.dangbei.lerad.leradwatcher&quot;, &quot;appium:appActivity&quot;: &quot;.ui.main.MainActivity&quot;, &quot;appium:unicodeKeyboard&quot;: true, &quot;appium:resetKeyboard&quot;: true}]}, &quot;desiredCapabilities&quot;: {&quot;platformName&quot;: &quot;Android&quot;, &quot;platformVersion&quot;: &quot;11&quot;, &quot;deviceName&quot;: &quot;Android&quot;, &quot;appPackage&quot;: &quot;com.dangbei.lerad.leradwatcher&quot;, &quot;appActivity&quot;: &quot;.ui.main.MainActivity&quot;, &quot;unicodeKeyboard&quot;: true, &quot;resetKeyboard&quot;: true}}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:227 Starting new HTTP connection (1): 192.168.18.61:4723
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session HTTP/1.1&quot; 200 957
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request<br/> -------------------------------Captured log call-------------------------------- <br/>[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/52021716-f7fd-4814-a058-721a0c155f11/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout[2]/android.widget.FrameLayout[2]/android.widget.TextView&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/52021716-f7fd-4814-a058-721a0c155f11/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/52021716-f7fd-4814-a058-721a0c155f11/element/0b64e344-8f0f-46cb-803c-847e3131a378/click {&quot;id&quot;: &quot;0b64e344-8f0f-46cb-803c-847e3131a378&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/52021716-f7fd-4814-a058-721a0c155f11/element/0b64e344-8f0f-46cb-803c-847e3131a378/click HTTP/1.1&quot; 200 14
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/52021716-f7fd-4814-a058-721a0c155f11/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.TextView&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/52021716-f7fd-4814-a058-721a0c155f11/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[32mINFO    [0m root:loging.py:33 检查：日志收集 页面titl 展示正确
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/52021716-f7fd-4814-a058-721a0c155f11/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.TextView[1]&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/52021716-f7fd-4814-a058-721a0c155f11/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[32mINFO    [0m root:loging.py:33 检查：点按【日志收集】请确保收集时间不少于30，提示展示正确
+[32mINFO    [0m root:loging.py:33 日志收集页面元素检查完毕，全部展示正确<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">Testcase/testcase_akeydiagnostic.py::Test_akeydiagnostic::test06</td>
+          <td class="col-duration">49.16</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session {&quot;capabilities&quot;: {&quot;firstMatch&quot;: [{&quot;platformName&quot;: &quot;Android&quot;, &quot;appium:platformVersion&quot;: &quot;11&quot;, &quot;appium:deviceName&quot;: &quot;Android&quot;, &quot;appium:appPackage&quot;: &quot;com.dangbei.lerad.leradwatcher&quot;, &quot;appium:appActivity&quot;: &quot;.ui.main.MainActivity&quot;, &quot;appium:unicodeKeyboard&quot;: true, &quot;appium:resetKeyboard&quot;: true}]}, &quot;desiredCapabilities&quot;: {&quot;platformName&quot;: &quot;Android&quot;, &quot;platformVersion&quot;: &quot;11&quot;, &quot;deviceName&quot;: &quot;Android&quot;, &quot;appPackage&quot;: &quot;com.dangbei.lerad.leradwatcher&quot;, &quot;appActivity&quot;: &quot;.ui.main.MainActivity&quot;, &quot;unicodeKeyboard&quot;: true, &quot;resetKeyboard&quot;: true}}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:227 Starting new HTTP connection (1): 192.168.18.61:4723
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session HTTP/1.1&quot; 200 957
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request<br/> -------------------------------Captured log call-------------------------------- <br/>[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/a9740ff8-98b6-41f7-b34b-193d4d22f772/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout[2]/android.widget.FrameLayout[2]/android.widget.TextView&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/a9740ff8-98b6-41f7-b34b-193d4d22f772/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/a9740ff8-98b6-41f7-b34b-193d4d22f772/element/093d29c5-568c-43b8-a545-fbf96b415814/click {&quot;id&quot;: &quot;093d29c5-568c-43b8-a545-fbf96b415814&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/a9740ff8-98b6-41f7-b34b-193d4d22f772/element/093d29c5-568c-43b8-a545-fbf96b415814/click HTTP/1.1&quot; 200 14
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/a9740ff8-98b6-41f7-b34b-193d4d22f772/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.TextView&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/a9740ff8-98b6-41f7-b34b-193d4d22f772/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/a9740ff8-98b6-41f7-b34b-193d4d22f772/element/c5275a09-df34-4433-bffb-53a09b268edb/click {&quot;id&quot;: &quot;c5275a09-df34-4433-bffb-53a09b268edb&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/a9740ff8-98b6-41f7-b34b-193d4d22f772/element/c5275a09-df34-4433-bffb-53a09b268edb/click HTTP/1.1&quot; 200 14
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/a9740ff8-98b6-41f7-b34b-193d4d22f772/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout[2]/android.widget.FrameLayout[1]/android.widget.TextView&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/a9740ff8-98b6-41f7-b34b-193d4d22f772/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/a9740ff8-98b6-41f7-b34b-193d4d22f772/element/2ef895b4-d065-4322-8c53-3f2a65f003ac/click {&quot;id&quot;: &quot;2ef895b4-d065-4322-8c53-3f2a65f003ac&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/a9740ff8-98b6-41f7-b34b-193d4d22f772/element/2ef895b4-d065-4322-8c53-3f2a65f003ac/click HTTP/1.1&quot; 200 14
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/a9740ff8-98b6-41f7-b34b-193d4d22f772/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout[1]/android.widget.ImageView&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/a9740ff8-98b6-41f7-b34b-193d4d22f772/element HTTP/1.1&quot; 404 493
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/a9740ff8-98b6-41f7-b34b-193d4d22f772/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout[1]/android.widget.ImageView&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/a9740ff8-98b6-41f7-b34b-193d4d22f772/element HTTP/1.1&quot; 404 493
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/a9740ff8-98b6-41f7-b34b-193d4d22f772/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout[1]/android.widget.ImageView&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/a9740ff8-98b6-41f7-b34b-193d4d22f772/element HTTP/1.1&quot; 404 493
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/a9740ff8-98b6-41f7-b34b-193d4d22f772/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout[1]/android.widget.ImageView&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/a9740ff8-98b6-41f7-b34b-193d4d22f772/element HTTP/1.1&quot; 404 493
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/a9740ff8-98b6-41f7-b34b-193d4d22f772/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout[1]/android.widget.ImageView&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/a9740ff8-98b6-41f7-b34b-193d4d22f772/element HTTP/1.1&quot; 404 493
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:388 POST http://192.168.18.61:4723/wd/hub/session/a9740ff8-98b6-41f7-b34b-193d4d22f772/element {&quot;using&quot;: &quot;xpath&quot;, &quot;value&quot;: &quot;/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout[1]/android.widget.ImageView&quot;}
+[35mDEBUG   [0m urllib3.connectionpool:connectionpool.py:452 http://192.168.18.61:4723 &quot;POST /wd/hub/session/a9740ff8-98b6-41f7-b34b-193d4d22f772/element HTTP/1.1&quot; 200 137
+[35mDEBUG   [0m selenium.webdriver.remote.remote_connection:remote_connection.py:440 Finished Request
+[32mINFO    [0m root:loging.py:33 日志可以上报成功<br/></div></td></tr></tbody></table></body></html>

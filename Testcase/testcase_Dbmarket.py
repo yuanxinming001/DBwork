@@ -8,7 +8,8 @@ from common.driver_tool import DriverTool
 from base.app_base_page import AppBasePage
 from common.loging import log
 from page.dbmarket.find_tab import Cfind_tab
-from page.dbmarket.app_details import Capp_details
+from page.dbmarket.movement_details import Cmovement_details
+from page.dbmarket.search_tab import Csearch_tab
 from page.dbmarket.home_page import Chomepage
 from page.dbmarket.my_tab import Cmy_tab
 from common.board import remotecontrol
@@ -28,7 +29,7 @@ class Test_dbmarket(AppBasePage):
         DriverTool.kill_app_driver()
 
     @allure.title('检查 当贝市场app可以成功打开')
-    def test01(self, rz=log()):
+    def test01(self, rz = log()):
         homepage = Chomepage()
         res_findtab = homepage.search_element(homepage.findtab)
         if res_findtab:
@@ -37,7 +38,7 @@ class Test_dbmarket(AppBasePage):
             rz.info('error:当贝市场打开异常，请手工检查')
 
     @allure.title('检查我的tab页面热播影视模块和专题榜单模块展示正常')
-    def test02(self, rz=log()):
+    def test02(self, rz = log()):
         homepage = Chomepage()
         homepage.goto_my_tab()
         mytab = Cmy_tab()
@@ -49,8 +50,7 @@ class Test_dbmarket(AppBasePage):
             rz.info('error:我的tab页面热播影视模块和专题榜单模块展示异常，请手工检查')
 
     @allure.title('检查热播影视资源模块，点击后可以跳转对应页面')
-    def test03(self):
-        rz = log()
+    def test03(self, rz = log()):
         homepage = Chomepage()
         homepage.goto_my_tab()
         my_tab = Cmy_tab()
@@ -63,8 +63,7 @@ class Test_dbmarket(AppBasePage):
             rz.info('error:请人工检查热播影视资源模块，点击后跳转页面异常')
 
     @allure.title('检查专题榜单源模块，点击后可以跳转对应页面')
-    def test04(self):
-        rz = log()
+    def test04(self, rz = log()):
         homepage = Chomepage()
         homepage.goto_my_tab()
         my_tab = Cmy_tab()
@@ -77,7 +76,6 @@ class Test_dbmarket(AppBasePage):
 
     @allure.title('检查播影视模块资源页面，点击更多电影tab，跳转页面正确')
     def test05(self):
-        rz = log()
         homepage = Chomepage()
         homepage.goto_my_tab()
         my_tab = Cmy_tab()
@@ -123,10 +121,38 @@ class Test_dbmarket(AppBasePage):
         find_tab.click_top2_resources_1()
         app_details.check_history()
 
-    @allure.title('检查最后一排 搜索功能模块显示正确，点击可以跳转正确页面')
-    def test10(self):
+    @allure.title('检查第三排 搜索功能模块显示正确，点击可以跳转正确页面')
+    def test10(self, rz = log()):
         homepage = Chomepage()
         homepage.goto_find_tab()
-        app_details = Capp_details()
         find_tab = Cfind_tab()
+        find_tab.click_top3_resources_1()
+        searcher_tab = Csearch_tab()
+        res = searcher_tab.search_element(searcher_tab.hot_application_title)
+        if res:
+            rz.info('搜索页面热门应用列表title存在，跳转页面正确')
+        else:
+            rz.info('error: 没有找到热门应用列表title，跳转页面异常请人工检查')
+
+    @allure.title('检查最后一排 装机必备功能模块显示正确，点击可以跳转正确页面')
+    def test11(self):
+        homepage = Chomepage()
+        homepage.goto_find_tab()
+        find_tab = Cfind_tab()
+        find_tab.click_top3_resources_2()
+
+    @allure.title('检查最后一排 运动健康功能模块显示正确，点击可以跳转正确页面')
+    def test12(self):
+        homepage = Chomepage()
+        homepage.goto_find_tab()
+        find_tab = Cfind_tab()
+        find_tab.click_top3_resources_3()
+        movement_details = Cmovement_details()
+        movement_details.get_The_default()
+
+
+
+
+
+
 

@@ -56,7 +56,7 @@ class Capp_details(AppBasePage):
         if res:
             rz.info('成功跳转到下载应用详情页面')
         else:
-            print('error:没有发现历史版本，跳转到下载应用详情页面异常请人工检查')
+            rz.info('error:没有发现历史版本，跳转到下载应用详情页面异常请人工检查')
         
 
 
