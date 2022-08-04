@@ -49,6 +49,17 @@ class Cfind_tab(AppBasePage):
         self.top3_resources_2_avtitle = (MobileBy.XPATH, '/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.RelativeLayout/android.widget.RelativeLayout[14]/android.widget.TextView')
 
 
+        # 页面最底部装机必备 标题 down title
+        self.down_title = (MobileBy.XPATH, '/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.support.v4.view.ViewPager/android.widget.ScrollView/android.widget.RelativeLayout/android.widget.TextView')
+
+        # 页面最底部装机必备：精选专题 down one
+        self.down_one =  (MobileBy.XPATH, '/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.support.v4.view.ViewPager/android.widget.ScrollView/android.widget.RelativeLayout/android.widget.ImageView[7]')
+
+        # 页面最底部装机必备：常用工具 down two
+        self.down_two = (MobileBy.XPATH, '/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.support.v4.view.ViewPager/android.widget.ScrollView/android.widget.RelativeLayout/android.widget.ImageView[8]')
+
+        # 页面最底部装机必备：更多精品应用 down three
+        self.down_three = (MobileBy.XPATH, '/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.support.v4.view.ViewPager/android.widget.ScrollView/android.widget.RelativeLayout/android.widget.ImageView[9]')
 
 
 
@@ -76,6 +87,64 @@ class Cfind_tab(AppBasePage):
     # 检查第三排运动健康模块点击跳转页面正确 click_top3_resources_3
     def click_top3_resources_3(self, rz = log()):
         self.search_element(self.top3_resources_3).click()
+
+    # 检查最后一排 音乐娱乐功能模块显示正确，点击可以跳转正确页面 click_top3_resources_4
+    def click_top3_resources_4(self, rz = log()):
+        self.search_element(self.top3_resources_4).click()
+
+    # 检查最后一排 热门游戏功能模块显示正确，点击可以跳转正确页面 click_top3_resources_5
+    def click_top3_resources_5(self, rz = log()):
+        self.search_element(self.top3_resources_5).click()
+
+    # 检查最后一排 实用工具功能模块显示正确，点击可以跳转正确页面 click_top3_resources_6
+    def click_top3_resources_6(self, rz = log()):
+        self.search_element(self.top3_resources_6).click()
+
+    # 滑动到最底部，找到装机必备模块
+    def findtab_downtitle(self, rz=log()):
+        remotecontrol(send='down10')
+        remotecontrol(send='down10')
+        res_down_title = self.search_element(self.down_title)
+        if res_down_title:
+            rz.info('findtab底部装机必备模块显示正确')
+        else:
+            rz.info('error ：findtab底部没有找到装机必备模块')
+
+    # 滑动到最底部，检查精选专题模块显示正确
+    def findtab_downone(self, rz=log()):
+        remotecontrol(send='down10')
+        remotecontrol(send='down10')
+        res_down_one = self.search_element(self.down_one)
+        if res_down_one:
+            rz.info('findtab底部装精选专题模块显示正确')
+        else:
+            rz.info('error ：findtab底部没有找到精选专题模块')
+
+    # 滑动到最底部，检查常用工具专题模块显示正确
+    def findtab_downtwo(self, rz=log()):
+        remotecontrol(send='down10')
+        remotecontrol(send='down10')
+        res_down_two = self.search_element(self.down_two)
+        if res_down_two:
+            rz.info('findtab底部常用工具专题模块显示正确 ')
+        else:
+            rz.info('error ：findtab底部没有找到常用工具专题模块')
+
+    # 滑动到最底部，检查更多精品应用显示正确
+    def findtab_downthree(self, rz=log()):
+        remotecontrol(send='down10')
+        remotecontrol(send='down10')
+        res_down_three = self.search_element(self.down_three)
+        if res_down_three:
+            rz.info('findtab底部更多精品应用显示正确')
+        else:
+            rz.info('error ：findtab底部没有找到更多精品应用')
+
+
+
+
+
+
 
 
 

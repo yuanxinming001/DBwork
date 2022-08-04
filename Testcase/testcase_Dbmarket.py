@@ -1,7 +1,6 @@
 import os
 import sys
 import allure
-
 object_path = os.path.join(os.path.abspath(os.path.dirname(os.path.dirname(__file__))))
 sys.path.append(object_path)
 from common.driver_tool import DriverTool
@@ -16,7 +15,6 @@ from common.board import remotecontrol
 from page.dbmarket.app_details import Capp_details
 
 
-
 @allure.epic('当贝市场项目')
 class Test_dbmarket(AppBasePage):
 
@@ -29,7 +27,7 @@ class Test_dbmarket(AppBasePage):
         DriverTool.kill_app_driver()
 
     @allure.title('检查 当贝市场app可以成功打开')
-    def test01(self, rz = log()):
+    def test01(self, rz=log()):
         homepage = Chomepage()
         res_findtab = homepage.search_element(homepage.findtab)
         if res_findtab:
@@ -38,7 +36,7 @@ class Test_dbmarket(AppBasePage):
             rz.info('error:当贝市场打开异常，请手工检查')
 
     @allure.title('检查我的tab页面热播影视模块和专题榜单模块展示正常')
-    def test02(self, rz = log()):
+    def test02(self, rz=log()):
         homepage = Chomepage()
         homepage.goto_my_tab()
         mytab = Cmy_tab()
@@ -50,7 +48,7 @@ class Test_dbmarket(AppBasePage):
             rz.info('error:我的tab页面热播影视模块和专题榜单模块展示异常，请手工检查')
 
     @allure.title('检查热播影视资源模块，点击后可以跳转对应页面')
-    def test03(self, rz = log()):
+    def test03(self, rz=log()):
         homepage = Chomepage()
         homepage.goto_my_tab()
         my_tab = Cmy_tab()
@@ -63,7 +61,7 @@ class Test_dbmarket(AppBasePage):
             rz.info('error:请人工检查热播影视资源模块，点击后跳转页面异常')
 
     @allure.title('检查专题榜单源模块，点击后可以跳转对应页面')
-    def test04(self, rz = log()):
+    def test04(self, rz=log()):
         homepage = Chomepage()
         homepage.goto_my_tab()
         my_tab = Cmy_tab()
@@ -84,7 +82,6 @@ class Test_dbmarket(AppBasePage):
         my_tab.click_more_mv()
         app_details = Capp_details()
         app_details.check_history()
-
 
     @allure.title('检查榜单资源内容，点击后跳转页面正确')
     def test06(self):
@@ -122,7 +119,7 @@ class Test_dbmarket(AppBasePage):
         app_details.check_history()
 
     @allure.title('检查第三排 搜索功能模块显示正确，点击可以跳转正确页面')
-    def test10(self, rz = log()):
+    def test10(self, rz=log()):
         homepage = Chomepage()
         homepage.goto_find_tab()
         find_tab = Cfind_tab()
@@ -149,6 +146,64 @@ class Test_dbmarket(AppBasePage):
         find_tab.click_top3_resources_3()
         movement_details = Cmovement_details()
         movement_details.get_The_default()
+
+    @allure.title('检查最后一排 音乐娱乐功能模块显示正确，点击可以跳转正确页面')
+    def test13(self, rz=log()):
+        homepage = Chomepage()
+        homepage.goto_find_tab()
+        find_tab = Cfind_tab()
+        find_tab.click_top3_resources_4()
+        movement_details = Cmovement_details()
+        movement_details.get_The_default()
+
+    @allure.title('检查最后一排 热门游戏功能模块显示正确，点击可以跳转正确页面')
+    def test14(self):
+        homepage = Chomepage()
+        homepage.goto_find_tab()
+        find_tab = Cfind_tab()
+        find_tab.click_top3_resources_5()
+        movement_details = Cmovement_details()
+        movement_details.get_The_default()
+
+    @allure.title('检查最后一排 实用工具功能模块显示正确，点击可以跳转正确页面')
+    def test15(self):
+        homepage = Chomepage()
+        homepage.goto_find_tab()
+        find_tab = Cfind_tab()
+        find_tab.click_top3_resources_6()
+        movement_details = Cmovement_details()
+        movement_details.get_The_default()
+
+    @allure.title('检查发现tab底部装机必备模块功能显示正确')
+    def test16(self):
+        homepage = Chomepage()
+        homepage.goto_find_tab()
+        find_tab = Cfind_tab()
+        find_tab.findtab_downtitle()
+
+    @allure.title('检查发现tab页面最底部精选专题模块显示正确')
+    def test17(self):
+        homepage = Chomepage()
+        homepage.goto_find_tab()
+        find_tab = Cfind_tab()
+        find_tab.findtab_downone()
+
+    @allure.title('检查发现tab页面最底部常用工具专题模块显示正确')
+    def test18(self):
+        homepage = Chomepage()
+        homepage.goto_find_tab()
+        find_tab = Cfind_tab()
+        find_tab.findtab_downtwo()
+
+    @allure.title('检查发现tab页面最底部更多精品应用显示正确')
+    def test19(self):
+        homepage = Chomepage()
+        homepage.goto_find_tab()
+        find_tab = Cfind_tab()
+        find_tab.findtab_downthree()
+
+
+
 
 
 

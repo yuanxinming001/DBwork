@@ -50,6 +50,30 @@ def remotecontrol(send):
         time.sleep(1)
         os.system('adb shell input keyevent 22')
 
+    if send == 'down10':
+        # down
+        os.system('adb shell input keyevent 20')
+        time.sleep(1)
+        os.system('adb shell input keyevent 20')
+        time.sleep(1)
+        os.system('adb shell input keyevent 20')
+        time.sleep(1)
+        os.system('adb shell input keyevent 20')
+        time.sleep(1)
+        os.system('adb shell input keyevent 20')
+        time.sleep(1)
+        os.system('adb shell input keyevent 20')
+        time.sleep(1)
+        os.system('adb shell input keyevent 20')
+        time.sleep(1)
+        os.system('adb shell input keyevent 20')
+        time.sleep(1)
+        os.system('adb shell input keyevent 20')
+        time.sleep(1)
+        os.system('adb shell input keyevent 20')
+        time.sleep(1)
+
+
 
 
 
